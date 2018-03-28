@@ -42,7 +42,7 @@
 			<a href="${basePath}/manage/index">
 				<img src="${basePath}/resources/zheng-admin/images/logo.png"/>
 			</a>
-			<span id="system_title">权限管理系统</span>
+			<span id="system_title">仓库权限管理系统</span>
 		</li>
 		<li class="pull-right">
 			<ul class="hi-menu">

@@ -21,13 +21,9 @@
     <modules>
         <module>zheng-admin</module>
         <module>zheng-common</module>
-        <module>zheng-oss</module>
         <module>zheng-upms</module>
         <module>zheng-cms</module>
-        <module>zheng-pay</module>
         <module>zheng-ucenter</module>
-        <module>zheng-wechat</module>
-        <module>zheng-shop</module>
         <module>zheng-api</module>
         <module>zheng-demo</module>
     </modules>
