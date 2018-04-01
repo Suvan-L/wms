@@ -6,10 +6,12 @@
 target
 *.log
 *.log.*
-**/resources/zheng-admin
+**/resources/wms-admin
 generatorConfig.xml
 .DS_Store
 *.cache
 *.lock
 /build/
 *.settings
+
+环境启动脚本

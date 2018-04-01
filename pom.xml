@@ -2,13 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zheng</groupId>
-    <artifactId>zheng</artifactId>
+    <groupId>org.suvan</groupId>
+    <artifactId>wms</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>zheng</name>
-    <url>http://www.zhangshuzheng.cn</url>
+    <name>wms</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,12 +18,11 @@
     </properties>
 
     <modules>
-        <module>zheng-admin</module>
-        <module>zheng-common</module>
-        <module>zheng-upms</module>
-        <module>zheng-cms</module>
-        <module>zheng-ucenter</module>
-        <module>zheng-api</module>
-        <module>zheng-demo</module>
+        <module>wms-admin</module>
+        <module>wms-common</module>
+        <module>wms-upms</module>
+        <module>wms-cms</module>
+        <module>wms-api</module>
+        <module>wms-demo</module>
     </modules>
 </project>
