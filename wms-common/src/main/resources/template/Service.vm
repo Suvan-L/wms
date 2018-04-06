@@ -5,8 +5,8 @@ import ${package_name}.dao.model.${model};
 import ${package_name}.dao.model.${model}Example;
 
 /**
-* ${model}Service接口
-* Created by shuzheng on ${ctime}.
+* ${model}Service 接口
+* Created by suvan on ${ctime}.
 */
 public interface ${model}Service extends BaseService<${model}, ${model}Example> {
 

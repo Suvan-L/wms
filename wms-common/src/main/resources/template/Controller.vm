@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * ${modelname}controller
- * Created by shuzheng on ${ctime}.
+ * ${modelname} Controller
+ * Created by suvan on ${ctime}.
  */
 @Controller
 @RequestMapping("/manage")

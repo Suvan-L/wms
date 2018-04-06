@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* ${model}Service实现
-* Created by shuzheng on ${ctime}.
+* ${model}Service 实现类
+* Created by suvan on ${ctime}.
 */
 @Service
 @Transactional
