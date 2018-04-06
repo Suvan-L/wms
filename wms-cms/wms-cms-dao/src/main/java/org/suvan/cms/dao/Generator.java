@@ -7,14 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代码生成类
- * Created by ZhangShuzheng on 2017/1/10.
+ * cms 代码生成类
  */
 public class Generator {
 
 	// 根据命名规范，只修改此常量值即可
 	private static String MODULE = "wms-cms";
-	private static String DATABASE = "zheng";
+	private static String DATABASE = "wms";
 	private static String TABLE_PREFIX = "cms_";
 	private static String PACKAGE_NAME = "org.suvan.cms";
 	private static String JDBC_DRIVER = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.driver");

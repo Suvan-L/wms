@@ -8,13 +8,12 @@ import java.util.Map;
 
 /**
  * 代码生成类
- * Created by ZhangShuzheng on 2017/1/10.
  */
 public class Generator {
 
 	// 根据命名规范，只修改此常量值即可
 	private static String MODULE = "wms-upms";
-	private static String DATABASE = "zheng";
+	private static String DATABASE = "wms";
 	private static String TABLE_PREFIX = "upms_";
 	private static String PACKAGE_NAME = "org.suvan.upms";
 	private static String JDBC_DRIVER = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.driver");

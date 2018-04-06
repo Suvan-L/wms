@@ -15,7 +15,8 @@ import static org.suvan.common.util.StringUtil.lineToHump;
 
 /**
  * 代码生成类
- * Created by ZhangShuzheng on 2017/1/10.
+ *
+ * - 【注意】：如果路径文件夹中，由空格，那么获取的时候会被替换成，%20，所以需要在代码中加入处理 replace("%20", " ")
  */
 public class MybatisGeneratorUtil {
 
@@ -52,10 +53,10 @@ public class MybatisGeneratorUtil {
 
 		String os = System.getProperty("os.name");
 		if (os.toLowerCase().startsWith("win")) {
-			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath().replaceFirst("/", "");
-			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath().replaceFirst("/", "");
-			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath().replaceFirst("/", "");
-			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath().replaceFirst("/", "");
+			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath().replaceFirst("/", "").replace("%20", " ");
+			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath().replaceFirst("/", "").replace("%20", " ");
+			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath().replaceFirst("/", "").replace("%20", " ");
+			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath().replaceFirst("/", "").replace("%20", " ");
 		} else {
 			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath();
 			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath();
@@ -64,8 +65,9 @@ public class MybatisGeneratorUtil {
 		}
 
 		String targetProject = module + "/" + module + "-dao";
-		String basePath = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "").replace(targetProject, "").replaceFirst("/", "");
-		String generatorConfigXml = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "") + "/src/main/resources/generatorConfig.xml";
+		String basePath = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "").replace(targetProject, "").replaceFirst("/", "").replace("%20", " ");
+		String generatorConfigXml = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "").replaceFirst("/", "").replace("%20", " ") + "/src/main/resources/generatorConfig.xml";
+
 		targetProject = basePath + targetProject;
 		String sql = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + tablePrefix + "_%';";
 
@@ -97,7 +99,8 @@ public class MybatisGeneratorUtil {
 			context.put("generator_jdbc_password", AESUtil.aesDecode(jdbcPassword));
 			context.put("last_insert_id_tables", lastInsertIdTables);
 			VelocityUtil.generate(generatorConfig_vm, generatorConfigXml, context);
-			// 删除旧代码
+
+			// 删除旧代码（会删除原有的 DO, DOExample, DOMapper.xml and DOMapper.java 模型）
 			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model"));
 			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
 			deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
@@ -119,6 +122,7 @@ public class MybatisGeneratorUtil {
 		}
 		System.out.println("========== 结束运行MybatisGenerator ==========");
 
+		//若已经存在 Service，不会进行覆盖
 		System.out.println("========== 开始生成Service ==========");
 		String ctime = new SimpleDateFormat("yyyy/M/d").format(new Date());
 		String servicePath = basePath + module + "/" + module + "-rpc-api" + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/rpc/api";
