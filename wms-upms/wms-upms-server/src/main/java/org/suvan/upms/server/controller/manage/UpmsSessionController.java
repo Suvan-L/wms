@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 会话管理controller
- * Created by shuzheng on 2017/2/28.
+ *
  */
 @Controller
 @Api(value = "会话管理", description = "会话管理")

@@ -11,7 +11,7 @@ import com.alibaba.rocketmq.common.message.MessageExt;
 import java.util.List;
 
 /**
- * Created by ZhangShuzheng on 2016/12/8.
+ *
  */
 public class Consumer {
 

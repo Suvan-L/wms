@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 系统接口
- * Created by ZhangShuzheng on 2017/6/13.
+ *
  */
 public class Initialize implements BaseInterface {
 

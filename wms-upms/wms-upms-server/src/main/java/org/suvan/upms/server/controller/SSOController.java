@@ -38,7 +38,7 @@ import java.util.UUID;
 
 /**
  * 单点登录管理
- * Created by shuzheng on 2016/12/10.
+ *
  */
 @Controller
 @RequestMapping("/sso")
@@ -70,7 +70,7 @@ public class SSOController extends BaseController {
         if (StringUtils.isBlank(appid)) {
             throw new RuntimeException("无效访问！");
         }
-        // 判断请求认证系统是否注册
+        // 判断请求认证系统是否注册（appid 即是系统（cms_upms_system 的 nam 字段））
         UpmsSystemExample upmsSystemExample = new UpmsSystemExample();
         upmsSystemExample.createCriteria()
                 .andNameEqualTo(appid);
@@ -81,6 +81,9 @@ public class SSOController extends BaseController {
         return "redirect:/sso/login?backurl=" + URLEncoder.encode(backurl, "utf-8");
     }
 
+    /**
+     * GET 登陆
+     */
     @ApiOperation(value = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request) {
@@ -109,6 +112,9 @@ public class SSOController extends BaseController {
         return "/sso/login.jsp";
     }
 
+    /**
+     * POST 登陆
+     */
     @ApiOperation(value = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -125,11 +131,12 @@ public class SSOController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         String sessionId = session.getId().toString();
-        // 判断是否已登录，如果已登录，则回跳，防止重复登录
+
+        // 判断是否已登录，如果已登录，则回跳，防止重复登录（Redis 判断 Session id）
         String hasCode = RedisUtil.get(ZHENG_UPMS_SERVER_SESSION_ID + "_" + sessionId);
-        // code校验值
+        // code 校验值
         if (StringUtils.isBlank(hasCode)) {
-            // 使用shiro认证
+            // 使用 shiro 认证
             UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
             try {
                 if (BooleanUtils.toBoolean(rememberMe)) {

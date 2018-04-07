@@ -5,7 +5,7 @@ import com.alibaba.rocketmq.client.producer.SendResult;
 import com.alibaba.rocketmq.common.message.Message;
 
 /**
- * Created by ZhangShuzheng on 2016/12/8.
+ *
  */
 public class Producer {
 

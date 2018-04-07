@@ -5,7 +5,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 /**
  * 支持加密配置文件插件
- * Created by ZhangShuzheng on 2017/2/4.
+ *
  */
 public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 

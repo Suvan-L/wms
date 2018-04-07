@@ -4,7 +4,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by ZhangShuzheng on 2016/11/1.
+ *
  */
 @Component
 public class TestTaskImpl {

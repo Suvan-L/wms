@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * 后台controller
- * Created by ZhangShuzheng on 2017/01/19.
+ *
  */
 @Controller
 @RequestMapping("/manage")
@@ -44,6 +44,7 @@ public class ManageController extends BaseController {
 				.andStatusEqualTo((byte) 1);
 		List<UpmsSystem> upmsSystems = upmsSystemService.selectByExample(upmsSystemExample);
 		modelMap.put("upmsSystems", upmsSystems);
+
 		// 当前登录用户权限
 		Subject subject = SecurityUtils.getSubject();
 		String username = (String) subject.getPrincipal();

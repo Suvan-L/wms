@@ -33,7 +33,7 @@ import java.util.Map;
 
 /**
  * 权限controller
- * Created by shuzheng on 2017/2/6.
+ *
  */
 @Controller
 @Api(value = "权限管理", description = "权限管理")
