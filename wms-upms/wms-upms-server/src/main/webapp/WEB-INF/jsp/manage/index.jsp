@@ -43,8 +43,8 @@
 			<a href="${basePath}/manage/index">
 				<img src="${basePath}/resources/wms-admin/images/logo.png"/>
 			</a>
-			<!-- 此处在 admin.js 会执行强制替换-->
-			<span id="system_title">仓库用户权限管理模块</span>
+			<!-- 此处在 admin.js 中执行强制替换（数据指定）-->
+			<span id="system_title"></span>
 		</li>
 		<li class="pull-right">
 			<ul class="hi-menu">
@@ -88,15 +88,15 @@
 						<li class="hidden-xs">
 							<a class="waves-effect" data-ma-action="fullscreen" href="javascript:fullPage();"><i class="zmdi zmdi-fullscreen"></i> 全屏模式</a>
 						</li>
-						<li>
-							<a class="waves-effect" data-ma-action="clear-localstorage" href="javascript:;"><i class="zmdi zmdi-delete"></i> 清除缓存</a>
-						</li>
-						<li>
-							<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>
-						</li>
-						<li>
-							<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>
-						</li>
+						<%--<li>--%>
+							<%--<a class="waves-effect" data-ma-action="clear-localstorage" href="javascript:;"><i class="zmdi zmdi-delete"></i> 清除缓存</a>--%>
+						<%--</li>--%>
+						<%--<li>--%>
+							<%--<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>--%>
+						<%--</li>--%>
+						<%--<li>--%>
+							<%--<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>--%>
+						<%--</li>--%>
 						<li>
 							<a class="waves-effect" href="${basePath}/sso/logout"><i class="zmdi zmdi-run"></i> 退出登录</a>
 						</li>
@@ -121,15 +121,15 @@
 				</div>
 			</a>
 			<ul class="main-menu">
-				<li>
-					<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-account"></i> 个人资料</a>
-				</li>
-				<li>
-					<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>
-				</li>
-				<li>
-					<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>
-				</li>
+				<%--<li>--%>
+					<%--<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-account"></i> 个人资料</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+					<%--<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>--%>
+				<%--</li>--%>
+				<%--<li>--%>
+					<%--<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>--%>
+				<%--</li>--%>
 				<li>
 					<a class="waves-effect" href="${basePath}/sso/logout"><i class="zmdi zmdi-run"></i> 退出登录</a>
 				</li>
@@ -177,23 +177,28 @@
 			<ul id="tabs" class="tabs">
 				<li id="tab_home" data-index="home" data-closeable="false" class="cur">
 					<a class="waves-effect waves-light" href="javascript:;">首页</a>
-				</li>
-			</ul>
+				</li> </ul>
 		</div>
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">
-				<p><h4>仓库用户权限管理模块</h4></p>
-				<p><b>系统简介</b>：本系统是基于RBAC授权和基于用户授权的细粒度权限控制通用平台，并提供单点登录、会话管理和日志管理。接入的系统可自由定义组织、角色、权限、资源等。</p><br/>
-				<p><h4>系统功能概述：</h4></p>
+				<p><h4>一. 权限管理模块 - 功能概述：</h4></p>
 				<p><b>系统组织管理</b>：系统和组织增加、删除、修改、查询功能。</p>
 				<p><b>用户角色管理</b>：用户和角色增加、删除、修改、查询功能。</p>
 				<p><b>资源权限管理</b>：菜单和按钮增加、删除、修改、查询功能。</p>
 				<p><b>权限分配管理</b>：提供给角色和用户的权限增加、删除、修改、查询功能。</p>
 				<p><b>单点登录(SSO)</b>：提供统一用户单点登录认证、用户鉴权功能。</p>
 				<p><b>用户会话管理</b>：提供分布式用户会话管理</p>
-				<p><b>操作日志管理</b>：提供记录用户登录、操作等日志。</p><br/>
-				<p><h4>对外接口概述：</h4></p>
-				<p><b>系统组织数据接口</b>、<b>用户角色数据接口</b>、<b>资源权限数据接口</b>、<b>单点登录(SSO)接口</b>、<b>用户鉴权接口</b></p><br/>
+				<p><b>操作日志管理</b>：提供记录用户登录、操作等日志</p><br/>
+				<p><h4>二. 对外接口概述：</h4></p>
+				<p>
+					<ul>
+						<li><b>系统组织数据接口</b></li>
+                        <li><b>用户角色数据接口</b></li>
+                        <li><b>资源权限数据接口</b></li>
+                        <li><b>用户鉴权接口</b></li>
+						<li><b>单点登录(SSO)接口</b></li>
+					</ul>
+				</p>
 			</div>
 		</div>
 	</section>
