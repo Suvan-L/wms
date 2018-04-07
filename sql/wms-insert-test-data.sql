@@ -35,8 +35,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ***************************
 
 -- 系统
-INSERT INTO `upms_system` VALUES ('1', 'zmdi zmdi-shield-security', '/resources/wms-admin/images/wms-upms.png', '#29A176', 'http://upms.wms.cn:1111', '1', 'wms-upms-server', '用户权限管理系统', '用户权限管理系统（RBAC 细粒度用户权限、统一后台、单点登录、会话管理）', '1', '1');
-INSERT INTO `upms_system` VALUES ('2', 'zmdi zmdi-wikipedia', '/resources/wms-admin/images/wms-cms.png', '#455EC5', 'http://cms.wms.cn:2222', '1', 'wms-cms-admin', '仓库库存管理系统', '仓库库存管理系统', '2', '2');
+INSERT INTO `upms_system` VALUES ('1', 'zmdi zmdi-shield-security', '/resources/wms-admin/images/wms-upms.png', '#29A176', 'http://upms.wms.cn:1111', '1', 'wms-upms-server', '权限管理模块', '实现 RBAC 细粒度用户权限、统一后台、单点登录、会话管理', '1', '1');
+INSERT INTO `upms_system` VALUES ('2', 'zmdi zmdi-wikipedia', '/resources/wms-admin/images/wms-cms.png', '#455EC5', 'http://cms.wms.cn:2222', '1', 'wms-cms-admin', '库存管理模块', '对物流信息进行统筹规划', '2', '2');
 
 -- 日志
 
@@ -48,78 +48,98 @@ INSERT INTO `upms_organization` VALUES ('4', null, '河北分部', '河北省石
 INSERT INTO `upms_organization` VALUES ('5', null, '海外分部', '国外业务', '1488122502752');
 
 -- 权限
-INSERT INTO `upms_permission` VALUES ('1', '1', '0', '系统组织管理', '1', '', '', 'zmdi zmdi-accounts-list', '1', '1', '1');
-INSERT INTO `upms_permission` VALUES ('2', '1', '1', '系统管理', '2', 'upms:system:read', '/manage/system/index', '', '1', '2', '2');
-INSERT INTO `upms_permission` VALUES ('3', '1', '1', '组织管理', '2', 'upms:organization:read', '/manage/organization/index', '', '1', '3', '3');
-INSERT INTO `upms_permission` VALUES ('4', '1', '0', '角色用户管理', '1', '', '', 'zmdi zmdi-accounts', '1', '4', '4');
-INSERT INTO `upms_permission` VALUES ('5', '1', '4', '角色管理', '2', 'upms:role:read', '/manage/role/index', '', '1', '6', '6');
-INSERT INTO `upms_permission` VALUES ('6', '1', '4', '用户管理', '2', 'upms:user:read', '/manage/user/index', '', '1', '5', '5');
-INSERT INTO `upms_permission` VALUES ('7', '1', '0', '权限资源管理', '1', '', '', 'zmdi zmdi-lock-outline', '1', '7', '7');
-INSERT INTO `upms_permission` VALUES ('8', '1', '0', '其他数据管理', '1', '', '', 'zmdi zmdi-more', '1', '12', '12');
-INSERT INTO `upms_permission` VALUES ('9', '1', '12', '会话管理', '2', 'upms:session:read', '/manage/session/index', '', '1', '14', '14');
-INSERT INTO `upms_permission` VALUES ('10', '1', '12', '日志记录', '2', 'upms:log:read', '/manage/log/index', '', '1', '15', '15');
-INSERT INTO `upms_permission` VALUES ('11', '1', '2', '新增系统', '3', 'upms:system:create', '/manage/system/create', 'zmdi zmdi-plus', '1', '24', '24');
-INSERT INTO `upms_permission` VALUES ('12', '1', '2', '编辑系统', '3', 'upms:system:update', '/manage/system/update', 'zmdi zmdi-edit', '1', '25', '25');
-INSERT INTO `upms_permission` VALUES ('13', '1', '2', '删除系统', '3', 'upms:system:delete', '/manage/system/delete', 'zmdi zmdi-close', '1', '26', '26');
-INSERT INTO `upms_permission` VALUES ('14', '1', '3', '新增组织', '3', 'upms:organization:create', '/manage/organization/create', 'zmdi zmdi-plus', '1', '27', '27');
-INSERT INTO `upms_permission` VALUES ('15', '1', '3', '编辑组织', '3', 'upms:organization:update', '/manage/organization/update', 'zmdi zmdi-edit', '1', '28', '28');
-INSERT INTO `upms_permission` VALUES ('16', '1', '3', '删除组织', '3', 'upms:organization:delete', '/manage/organization/delete', 'zmdi zmdi-close', '1', '29', '29');
-INSERT INTO `upms_permission` VALUES ('17', '1', '6', '新增用户', '3', 'upms:user:create', '/manage/user/create', 'zmdi zmdi-plus', '1', '30', '30');
-INSERT INTO `upms_permission` VALUES ('18', '1', '6', '编辑用户', '3', 'upms:user:update', '/manage/user/update', 'zmdi zmdi-edit', '1', '31', '31');
-INSERT INTO `upms_permission` VALUES ('19', '1', '6', '删除用户', '3', 'upms:user:delete', '/manage/user/delete', 'zmdi zmdi-close', '1', '32', '32');
-INSERT INTO `upms_permission` VALUES ('20', '1', '5', '新增角色', '3', 'upms:role:create', '/manage/role/create', 'zmdi zmdi-plus', '1', '33', '33');
-INSERT INTO `upms_permission` VALUES ('21', '1', '5', '编辑角色', '3', 'upms:role:update', '/manage/role/update', 'zmdi zmdi-edit', '1', '34', '34');
-INSERT INTO `upms_permission` VALUES ('22', '1', '5', '删除角色', '3', 'upms:role:delete', '/manage/role/delete', 'zmdi zmdi-close', '1', '35', '35');
-INSERT INTO `upms_permission` VALUES ('23', '1', '39', '新增权限', '3', 'upms:permission:create', '/manage/permission/create', 'zmdi zmdi-plus', '1', '36', '36');
-INSERT INTO `upms_permission` VALUES ('24', '1', '39', '编辑权限', '3', 'upms:permission:update', '/manage/permission/update', 'zmdi zmdi-edit', '1', '37', '37');
-INSERT INTO `upms_permission` VALUES ('25', '1', '39', '删除权限', '3', 'upms:permission:delete', '/manage/permission/delete', 'zmdi zmdi-close', '1', '38', '38');
-INSERT INTO `upms_permission` VALUES ('26', '1', '7', '权限管理', '2', 'upms:permission:read', '/manage/permission/index', null, '1', '39', '39');
-INSERT INTO `upms_permission` VALUES ('27', '1', '5', '角色权限', '3', 'upms:role:permission', '/manage/role/permission', 'zmdi zmdi-key', '1', '1488091928257', '1488091928257');
-INSERT INTO `upms_permission` VALUES ('28', '1', '6', '用户组织', '3', 'upms:user:organization', '/manage/user/organization', 'zmdi zmdi-accounts-list', '1', '1488120011165', '1488120011165');
-INSERT INTO `upms_permission` VALUES ('29', '1', '6', '用户角色', '3', 'upms:user:role', '/manage/user/role', 'zmdi zmdi-accounts', '1', '1488120554175', '1488120554175');
-INSERT INTO `upms_permission` VALUES ('30', '1', '6', '用户权限', '3', 'upms:user:permission', '/manage/user/permission', 'zmdi zmdi-key', '1', '1488092013302', '1488092013302');
-INSERT INTO `upms_permission` VALUES ('31', '1', '14', '强制退出', '3', 'upms:session:forceout', '/manage/session/forceout', 'zmdi zmdi-run', '1', '1488379514715', '1488379514715');
+-- 系统 & 组织
+INSERT INTO `upms_permission` VALUES ('1', '1', '0', '系统 & 组织', '1', '', '', 'zmdi zmdi-accounts-list', '1', '1', '1');
+-- 系统
+INSERT INTO `upms_permission` VALUES ('11', '1', '1', '系统管理', '2', 'upms:system:read', '/manage/system/index', '', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('12', '1', '11', '新增系统', '3', 'upms:system:create', '/manage/system/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('13', '1', '11', '编辑系统', '3', 'upms:system:update', '/manage/system/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('14', '1', '11', '删除系统', '3', 'upms:system:delete', '/manage/system/delete', 'zmdi zmdi-close', '1', '1', '3');
+-- 组织
+INSERT INTO `upms_permission` VALUES ('21', '1', '1', '组织管理', '2', 'upms:organization:read', '/manage/organization/index', '', '1', '3', '3');
+INSERT INTO `upms_permission` VALUES ('22', '1', '21', '新增组织', '3', 'upms:organization:create', '/manage/organization/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('23', '1', '21', '编辑组织', '3', 'upms:organization:update', '/manage/organization/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('24', '1', '21', '删除组织', '3', 'upms:organization:delete', '/manage/organization/delete', 'zmdi zmdi-close', '1', '1', '3');
+-- 角色 & 用户
+INSERT INTO `upms_permission` VALUES ('3', '1', '0', '角色 & 用户', '1', '', '', 'zmdi zmdi-accounts', '1', '1', '1');
+-- 角色
+INSERT INTO `upms_permission` VALUES ('31', '1', '3', '角色管理', '2', 'upms:role:read', '/manage/role/index', '', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('32', '1', '31', '新增角色', '3', 'upms:role:create', '/manage/role/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('33', '1', '31', '编辑角色', '3', 'upms:role:update', '/manage/role/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('34', '1', '31', '删除角色', '3', 'upms:role:delete', '/manage/role/delete', 'zmdi zmdi-close', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('35', '1', '31', '角色权限', '3', 'upms:role:permission', '/manage/role/permission', 'zmdi zmdi-key', '1', '1', '4');
+-- 用户
+INSERT INTO `upms_permission` VALUES ('41', '1', '3', '用户管理', '2', 'upms:user:read', '/manage/user/index', '', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('42', '1', '41', '新增用户', '3', 'upms:user:create', '/manage/user/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('43', '1', '41', '编辑用户', '3', 'upms:user:update', '/manage/user/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('44', '1', '41', '删除用户', '3', 'upms:user:delete', '/manage/user/delete', 'zmdi zmdi-close', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('45', '1', '41', '用户组织', '3', 'upms:user:organization', '/manage/user/organization', 'zmdi zmdi-accounts-list', '1', '1', '4');
+INSERT INTO `upms_permission` VALUES ('46', '1', '41', '用户角色', '3', 'upms:user:role', '/manage/user/role', 'zmdi zmdi-accounts', '1', '1', '5');
+INSERT INTO `upms_permission` VALUES ('47', '1', '41', '用户权限', '3', 'upms:user:permission', '/manage/user/permission', 'zmdi zmdi-key', '1', '1', '6');
+-- 权限资源
+INSERT INTO `upms_permission` VALUES ('5', '1', '0', '权限 & 资源', '1', '', '', 'zmdi zmdi-lock-outline', '1', '1', '1');
+-- 权限
+INSERT INTO `upms_permission` VALUES ('51', '1', '5', '权限管理', '2', 'upms:permission:read', '/manage/permission/index', '', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('52', '1', '51', '新增权限', '3', 'upms:permission:create', '/manage/permission/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('53', '1', '51', '编辑权限', '3', 'upms:permission:update', '/manage/permission/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('54', '1', '51', '删除权限', '3', 'upms:permission:delete', '/manage/permission/delete', 'zmdi zmdi-close', '1', '1', '3');
+-- 会话 & 日志
+INSERT INTO `upms_permission` VALUES ('6', '1', '0', '会话 & 日志', '1', '', '', 'zmdi zmdi-more', '1', '1', '1');
+-- 会话
+INSERT INTO `upms_permission` VALUES ('61', '1', '6', '会话管理', '2', 'upms:session:read', '/manage/session/index', '', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('62', '1', '61', '会话强制退出', '3', 'upms:session:forceout', '/manage/session/forceout', 'zmdi zmdi-run', '1', '1', '1');
+-- 日志
+INSERT INTO `upms_permission` VALUES ('71', '1', '6', '日志记录', '2', 'upms:log:read', '/manage/log/index', '', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('72', '1', '71', '删除日志', '3', 'upms:log:delete', '/manage/log/delete', 'zmdi zmdi-close', '1', '1', '1');
+
 
 -- 角色
 INSERT INTO `upms_role` VALUES ('1', 'boss', '超级管理员', '拥有所有权限', '1', '1');
-INSERT INTO `upms_role` VALUES ('2', 'admin', '管理员', '拥有除权限管理系统外的所有权限', '1487471013117', '2');
-INSERT INTO `upms_role` VALUES ('3', 'user', '普通用户', '拥有所有权限', '1487471553117', '3');
+INSERT INTO `upms_role` VALUES ('2', 'admin', '管理员', '拥有除操作 “用户权限管理系统“ 的所有权限', '1', '2');
+INSERT INTO `upms_role` VALUES ('3', 'user', '普通用户', '拥有部分权限', '1', '3');
 
 -- 角色 - 权限
+-- 系统 & 组织
 INSERT INTO `upms_role_permission` VALUES ('1', '1', '1');
-INSERT INTO `upms_role_permission` VALUES ('2', '1', '2');
-INSERT INTO `upms_role_permission` VALUES ('3', '1', '3');
-INSERT INTO `upms_role_permission` VALUES ('4', '1', '4');
-INSERT INTO `upms_role_permission` VALUES ('5', '1', '5');
-INSERT INTO `upms_role_permission` VALUES ('6', '1', '6');
-INSERT INTO `upms_role_permission` VALUES ('7', '1', '7');
-INSERT INTO `upms_role_permission` VALUES ('8', '1', '8');
-INSERT INTO `upms_role_permission` VALUES ('9', '1', '8');
-INSERT INTO `upms_role_permission` VALUES ('10', '1', '10');
-INSERT INTO `upms_role_permission` VALUES ('11', '1', '12');
-INSERT INTO `upms_role_permission` VALUES ('12', '1', '13');
-INSERT INTO `upms_role_permission` VALUES ('13', '1', '14');
-INSERT INTO `upms_role_permission` VALUES ('14', '1', '15');
-INSERT INTO `upms_role_permission` VALUES ('15', '1', '16');
-INSERT INTO `upms_role_permission` VALUES ('16', '1', '17');
-INSERT INTO `upms_role_permission` VALUES ('17', '1', '18');
-INSERT INTO `upms_role_permission` VALUES ('18', '1', '19');
-INSERT INTO `upms_role_permission` VALUES ('19', '1', '10');
-INSERT INTO `upms_role_permission` VALUES ('20', '1', '20');
-INSERT INTO `upms_role_permission` VALUES ('21', '1', '21');
-INSERT INTO `upms_role_permission` VALUES ('22', '1', '22');
-INSERT INTO `upms_role_permission` VALUES ('23', '1', '23');
-INSERT INTO `upms_role_permission` VALUES ('24', '1', '24');
-INSERT INTO `upms_role_permission` VALUES ('25', '1', '25');
-INSERT INTO `upms_role_permission` VALUES ('26', '1', '26');
-INSERT INTO `upms_role_permission` VALUES ('27', '1', '27');
-INSERT INTO `upms_role_permission` VALUES ('28', '1', '28');
-INSERT INTO `upms_role_permission` VALUES ('29', '1', '29');
-INSERT INTO `upms_role_permission` VALUES ('30', '1', '30');
-INSERT INTO `upms_role_permission` VALUES ('31', '1', '31');
+INSERT INTO `upms_role_permission` VALUES ('2', '1', '11');
+INSERT INTO `upms_role_permission` VALUES ('3', '1', '12');
+INSERT INTO `upms_role_permission` VALUES ('4', '1', '13');
+INSERT INTO `upms_role_permission` VALUES ('5', '1', '14');
+INSERT INTO `upms_role_permission` VALUES ('6', '1', '21');
+INSERT INTO `upms_role_permission` VALUES ('7', '1', '22');
+INSERT INTO `upms_role_permission` VALUES ('8', '1', '23');
+INSERT INTO `upms_role_permission` VALUES ('9', '1', '24');
+-- 角色 & 用户
+INSERT INTO `upms_role_permission` VALUES ('10', '1', '3');
+INSERT INTO `upms_role_permission` VALUES ('11', '1', '31');
+INSERT INTO `upms_role_permission` VALUES ('12', '1', '32');
+INSERT INTO `upms_role_permission` VALUES ('13', '1', '33');
+INSERT INTO `upms_role_permission` VALUES ('14', '1', '34');
+INSERT INTO `upms_role_permission` VALUES ('15', '1', '35');
+INSERT INTO `upms_role_permission` VALUES ('16', '1', '41');
+INSERT INTO `upms_role_permission` VALUES ('17', '1', '42');
+INSERT INTO `upms_role_permission` VALUES ('18', '1', '43');
+INSERT INTO `upms_role_permission` VALUES ('19', '1', '44');
+INSERT INTO `upms_role_permission` VALUES ('20', '1', '45');
+INSERT INTO `upms_role_permission` VALUES ('21', '1', '46');
+INSERT INTO `upms_role_permission` VALUES ('22', '1', '47');
+-- 权限资源
+INSERT INTO `upms_role_permission` VALUES ('23', '1', '5');
+INSERT INTO `upms_role_permission` VALUES ('24', '1', '51');
+INSERT INTO `upms_role_permission` VALUES ('25', '1', '52');
+INSERT INTO `upms_role_permission` VALUES ('26', '1', '53');
+INSERT INTO `upms_role_permission` VALUES ('27', '1', '54');
+-- 会话 & 日志
+INSERT INTO `upms_role_permission` VALUES ('28', '1', '6');
+INSERT INTO `upms_role_permission` VALUES ('29', '1', '61');
+INSERT INTO `upms_role_permission` VALUES ('30', '1', '62');
+INSERT INTO `upms_role_permission` VALUES ('31', '1', '71');
+INSERT INTO `upms_role_permission` VALUES ('32', '1', '72');
 
 -- 用户
-INSERT INTO `upms_user` VALUES ('1', 'admin', '3038D9CB63B3152A79B8153FB06C02F7', '66f1b370c660445a8657bf8bf1794486', '刘淑玮', '/resources/wms-admin/images/suvan-min.jpg', '', 'liushuwei0925@gmail.com', '1', '0', '1');
+INSERT INTO `upms_user` VALUES ('1', 'boss', '3038D9CB63B3152A79B8153FB06C02F7', '66f1b370c660445a8657bf8bf1794486', '老板', '/resources/wms-admin/images/suvan-min.jpg', '', 'boss@wms.com', '1', '0', '1');
+INSERT INTO `upms_user` VALUES ('2', 'admin', '3038D9CB63B3152A79B8153FB06C02F7', '66f1b370c660445a8657bf8bf1794486', '仓库管理员', '/resources/wms-admin/images/suvan-min.jpg', '', 'admin@wms.com', '1', '0', '1');
+INSERT INTO `upms_user` VALUES ('3', 'user', '3038D9CB63B3152A79B8153FB06C02F7', '66f1b370c660445a8657bf8bf1794486', '普通用户', '/resources/wms-admin/images/suvan-min.jpg', '', 'user@wms.com', '1', '0', '1');
 
 -- 用户 - 组织
 INSERT INTO `upms_user_organization` VALUES ('1', '1', '1');
@@ -127,6 +147,8 @@ INSERT INTO `upms_user_organization` VALUES ('2', '1', '2');
 INSERT INTO `upms_user_organization` VALUES ('3', '1', '3');
 INSERT INTO `upms_user_organization` VALUES ('4', '1', '4');
 INSERT INTO `upms_user_organization` VALUES ('5', '1', '5');
+INSERT INTO `upms_user_organization` VALUES ('6', '2', '2');
+INSERT INTO `upms_user_organization` VALUES ('7', '3', '5');
 
 -- 用户 - 权限
 INSERT INTO `upms_user_permission` VALUES ('1', '1', '1', '1');
@@ -134,6 +156,8 @@ INSERT INTO `upms_user_permission` VALUES ('2', '1', '1', '-1');
 
 -- 用户 - 角色
 INSERT INTO `upms_user_role` VALUES ('1', '1', '1');
+INSERT INTO `upms_user_role` VALUES ('2', '2', '2');
+INSERT INTO `upms_user_role` VALUES ('3', '3', '3');
 
 -- ***************************
 -- 仓库库存管理系统（内容管理系统）

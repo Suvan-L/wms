@@ -90,17 +90,17 @@ DROP TABLE IF EXISTS `upms_permission`;
 CREATE TABLE `upms_permission` (
   `permission_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号（自增 id）',
   `system_id` int(10) unsigned NOT NULL COMMENT '所属系统 id',
-  `pid` int(10) DEFAULT NULL COMMENT '所属上级 id',
+  `pid` int(10) DEFAULT NULL COMMENT '所属上级 id（权限 id）',
   `name` varchar(20) DEFAULT NULL COMMENT '名称',
   `type` tinyint(4) DEFAULT NULL COMMENT '类型(1: 目录, 2: 菜单, 3: 按钮)',
-  `permission_value` varchar(50) DEFAULT NULL COMMENT '权限值',
-  `uri` varchar(100) DEFAULT NULL COMMENT '子路径',
-  `icon` varchar(50) DEFAULT NULL COMMENT '图标（<i class="">）',
+  `permission_value` varchar(50) DEFAULT NULL COMMENT '权限值（目录类型的为空）',
+  `uri` varchar(100) DEFAULT NULL COMMENT '子路径（目录类型的为空）',
+  `icon` varchar(50) DEFAULT NULL COMMENT '图标（<i class="">）（菜单类型为空）',
   `status` tinyint(4) DEFAULT NULL COMMENT '状态(0: 禁止, 1: 正常)',
   `ctime` bigint(20) DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 权限表';
 
 -- 角色
 DROP TABLE IF EXISTS `upms_role`;
@@ -121,7 +121,7 @@ CREATE TABLE `upms_role_permission` (
   `role_id` int(10) unsigned NOT NULL COMMENT '角色编号（角色表 id）',
   `permission_id` int(10) unsigned NOT NULL COMMENT '权限编号（权限表 id）',
   PRIMARY KEY (`role_permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COMMENT='用戶限管理系统 - 角色 - 权限 - 关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COMMENT='用戶限管理系统 - 角色 - 权限 - 关联表';
 
 -- 用户
 DROP TABLE IF EXISTS `upms_user`;
@@ -138,7 +138,7 @@ CREATE TABLE `upms_user` (
   `locked` tinyint(4) DEFAULT NULL COMMENT '状态(0: 正常, 1:锁定)',
   `ctime` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户表';
 
 -- 用户 - 组织
 DROP TABLE IF EXISTS `upms_user_organization`;
@@ -147,7 +147,7 @@ CREATE TABLE `upms_user_organization` (
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号（用户表 id）',
   `organization_id` int(10) unsigned NOT NULL COMMENT '组织编号（组织表 id）',
   PRIMARY KEY (`user_organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户 - 组织 - 关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户 - 组织 - 关联表';
 
 -- 用户 - 权限
 DROP TABLE IF EXISTS `upms_user_permission`;
@@ -157,7 +157,7 @@ CREATE TABLE `upms_user_permission` (
   `permission_id` int(10) unsigned NOT NULL COMMENT '权限编号（权限表 id）',
   `type` tinyint(4) NOT NULL COMMENT '权限类型(-1: 减权限（删除）, 1: 增权限（增加）',
   PRIMARY KEY (`user_permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户 - 权限 - 关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户 - 权限 - 关联表';
 
 -- 用户 - 角色
 DROP TABLE IF EXISTS `upms_user_role`;
@@ -166,7 +166,7 @@ CREATE TABLE `upms_user_role` (
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号（用户表 id）',
   `role_id` int(10) DEFAULT NULL COMMENT '角色编号（角色表 id）',
   PRIMARY KEY (`user_role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户 - 角色 -  关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 用户 - 角色 -  关联表';
 
 
 
