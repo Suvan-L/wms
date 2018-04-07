@@ -4,10 +4,11 @@
   <resultMap id="BaseResultMap" type="org.suvan.cms.dao.model.CmsWarehouse">
     <id column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="area" jdbcType="INTEGER" property="area" />
     <result column="goods_area" jdbcType="INTEGER" property="goodsArea" />
+    <result column="status" jdbcType="DOUBLE" property="status" />
     <result column="admin" jdbcType="VARCHAR" property="admin" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    warehouse_id, address, status, area, goods_area, admin
+    warehouse_id, address, area, goods_area, status, admin, description
   </sql>
   <select id="selectByExample" parameterType="org.suvan.cms.dao.model.CmsWarehouseExample" resultMap="BaseResultMap">
     select
@@ -101,12 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.suvan.cms.dao.model.CmsWarehouse">
-    insert into cms_warehouse (warehouse_id, address, status, 
-      area, goods_area, admin
-      )
-    values (#{warehouseId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{area,jdbcType=INTEGER}, #{goodsArea,jdbcType=INTEGER}, #{admin,jdbcType=VARCHAR}
-      )
+    insert into cms_warehouse (warehouse_id, address, area, 
+      goods_area, status, admin, 
+      description)
+    values (#{warehouseId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{area,jdbcType=INTEGER}, 
+      #{goodsArea,jdbcType=INTEGER}, #{status,jdbcType=DOUBLE}, #{admin,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.suvan.cms.dao.model.CmsWarehouse">
     insert into cms_warehouse
@@ -117,17 +118,20 @@
       <if test="address != null">
         address,
       </if>
-      <if test="status != null">
-        status,
-      </if>
       <if test="area != null">
         area,
       </if>
       <if test="goodsArea != null">
         goods_area,
       </if>
+      <if test="status != null">
+        status,
+      </if>
       <if test="admin != null">
         admin,
+      </if>
+      <if test="description != null">
+        description,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,17 +141,20 @@
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
       <if test="area != null">
         #{area,jdbcType=INTEGER},
       </if>
       <if test="goodsArea != null">
         #{goodsArea,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=DOUBLE},
+      </if>
       <if test="admin != null">
         #{admin,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,17 +173,20 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
-      </if>
       <if test="record.area != null">
         area = #{record.area,jdbcType=INTEGER},
       </if>
       <if test="record.goodsArea != null">
         goods_area = #{record.goodsArea,jdbcType=INTEGER},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=DOUBLE},
+      </if>
       <if test="record.admin != null">
         admin = #{record.admin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -187,10 +197,11 @@
     update cms_warehouse
     set warehouse_id = #{record.warehouseId,jdbcType=INTEGER},
       address = #{record.address,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
       area = #{record.area,jdbcType=INTEGER},
       goods_area = #{record.goodsArea,jdbcType=INTEGER},
-      admin = #{record.admin,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=DOUBLE},
+      admin = #{record.admin,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -201,17 +212,20 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
       <if test="area != null">
         area = #{area,jdbcType=INTEGER},
       </if>
       <if test="goodsArea != null">
         goods_area = #{goodsArea,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=DOUBLE},
+      </if>
       <if test="admin != null">
         admin = #{admin,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
     </set>
     where warehouse_id = #{warehouseId,jdbcType=INTEGER}
@@ -219,10 +233,11 @@
   <update id="updateByPrimaryKey" parameterType="org.suvan.cms.dao.model.CmsWarehouse">
     update cms_warehouse
     set address = #{address,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
       area = #{area,jdbcType=INTEGER},
       goods_area = #{goodsArea,jdbcType=INTEGER},
-      admin = #{admin,jdbcType=VARCHAR}
+      status = #{status,jdbcType=DOUBLE},
+      admin = #{admin,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
     where warehouse_id = #{warehouseId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

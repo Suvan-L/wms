@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* CmsWarehouseService实现
-* Created by shuzheng on 2018/4/6.
+* CmsWarehouseService 实现类
+* Created by suvan on 2018/4/7.
 */
 @Service
 @Transactional

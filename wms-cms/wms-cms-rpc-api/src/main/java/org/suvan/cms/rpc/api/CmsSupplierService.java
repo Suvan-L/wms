@@ -5,8 +5,8 @@ import org.suvan.cms.dao.model.CmsSupplier;
 import org.suvan.cms.dao.model.CmsSupplierExample;
 
 /**
-* CmsSupplierService接口
-* Created by shuzheng on 2018/4/6.
+* CmsSupplierService 接口
+* Created by suvan on 2018/4/7.
 */
 public interface CmsSupplierService extends BaseService<CmsSupplier, CmsSupplierExample> {
 

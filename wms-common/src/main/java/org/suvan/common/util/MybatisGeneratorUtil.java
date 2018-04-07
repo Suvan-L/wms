@@ -92,8 +92,8 @@ public class MybatisGeneratorUtil {
 			String targetProjectSqlMap = basePath + module + "/" + module + "-rpc-service";
 			context.put("tables", tables);
 			context.put("generator_javaModelGenerator_targetPackage", packageName + ".dao.model");
-			context.put("generator_sqlMapGenerator_targetPackage", packageName + ".dao.mapper");
-			context.put("generator_javaClientGenerator_targetPackage", packageName + ".dao.mapper");
+			context.put("generator_sqlMapGenerator_targetPackage", packageName + ".dao.extendmapper");
+			context.put("generator_javaClientGenerator_targetPackage", packageName + ".dao.extendmapper");
 			context.put("targetProject", targetProject);
 			context.put("targetProject_sqlMap", targetProjectSqlMap);
 			context.put("generator_jdbc_password", AESUtil.aesDecode(jdbcPassword));
@@ -102,8 +102,8 @@ public class MybatisGeneratorUtil {
 
 			// 删除旧代码（会删除原有的 DO, DOExample, DOMapper.xml and DOMapper.java 模型）
 			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model"));
-			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
-			deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
+			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/extendmapper"));
+			deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/extendmapper"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -158,7 +158,7 @@ public class MybatisGeneratorUtil {
 				VelocityContext context = new VelocityContext();
 				context.put("package_name", packageName);
 				context.put("model", model);
-				context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
+				context.put("extendmapper", StringUtil.toLowerCaseFirstOne(model));
 				context.put("ctime", ctime);
 				VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
 				System.out.println(serviceImpl);

@@ -5,8 +5,8 @@ import org.suvan.cms.dao.model.CmsRecordIn;
 import org.suvan.cms.dao.model.CmsRecordInExample;
 
 /**
-* CmsRecordInService接口
-* Created by shuzheng on 2018/4/6.
+* CmsRecordInService 接口
+* Created by suvan on 2018/4/7.
 */
 public interface CmsRecordInService extends BaseService<CmsRecordIn, CmsRecordInExample> {
 

@@ -15,40 +15,32 @@
 
     <!--<dubbo:monitor protocol="registry"/>-->
 
-    <!-- 文章 -->
-    <bean id="cmsArticleServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsArticleServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsArticleService" ref="cmsArticleServiceImpl" timeout="10000"/>
+    <!-- 供应商 -->
+    <bean id="cmsSupplierServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsSupplierServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsSupplierService" ref="cmsSupplierServiceImpl" timeout="10000"/>
 
-    <!-- 类目 -->
-    <bean id="cmsCategoryServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsCategoryServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsCategoryService" ref="cmsCategoryServiceImpl" timeout="10000"/>
+    <!-- 客户 -->
+    <bean id="cmsCustomerServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsCustomerServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsCustomerService" ref="cmsCustomerServiceImpl" timeout="10000"/>
 
-    <!-- 评论 -->
-    <bean id="cmsCommentServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsCommentServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsCommentService" ref="cmsCommentServiceImpl" timeout="10000"/>
+    <!-- 货物 -->
+    <bean id="cmsGoodsServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsGoodsServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsGoodsService" ref="cmsGoodsServiceImpl" timeout="10000"/>
 
-    <!-- 标签 -->
-    <bean id="cmsTagServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsTagServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsTagService" ref="cmsTagServiceImpl" timeout="10000"/>
+    <!-- 仓库 -->
+    <bean id="cmsWarehouseServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsWarehouseServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsWarehouseService" ref="cmsWarehouseServiceImpl" timeout="10000"/>
 
-    <!-- 专题 -->
-    <bean id="cmsTopicImpl" class="org.suvan.cms.rpc.service.impl.CmsTopicServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsTopicService" ref="cmsTopicImpl" timeout="10000"/>
+    <!-- 仓库容量 -->
+    <bean id="cmsWarehouseCapacityServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsWarehouseCapacityServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsWarehouseCapacityService" ref="cmsWarehouseCapacityServiceImpl" timeout="10000"/>
 
-    <!-- 菜单 -->
-    <bean id="cmsMenuImpl" class="org.suvan.cms.rpc.service.impl.CmsMenuServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsMenuService" ref="cmsMenuImpl" timeout="10000"/>
+    <!-- 入库记录 -->
+    <bean id="cmsRecordInServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsRecordInServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsRecordInService" ref="cmsRecordInServiceImpl" timeout="10000"/>
 
-    <!-- 单页 -->
-    <bean id="cmsPageImpl" class="org.suvan.cms.rpc.service.impl.CmsPageServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsPageService" ref="cmsPageImpl" timeout="10000"/>
-
-    <!-- 设置 -->
-    <bean id="cmsSettingImpl" class="org.suvan.cms.rpc.service.impl.CmsSettingServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsSettingService" ref="cmsSettingImpl" timeout="10000"/>
-
-    <!-- 系统 -->
-    <bean id="cmsSystemImpl" class="org.suvan.cms.rpc.service.impl.CmsSystemServiceImpl"/>
-    <dubbo:service interface="org.suvan.cms.rpc.api.CmsSystemService" ref="cmsSystemImpl" timeout="10000"/>
+    <!-- 入库记录 -->
+    <bean id="cmsRecordOutServiceImpl" class="org.suvan.cms.rpc.service.impl.CmsRecordOutServiceImpl"/>
+    <dubbo:service interface="org.suvan.cms.rpc.api.CmsRecordOutService" ref="cmsRecordOutServiceImpl" timeout="10000"/>
 
 </beans>

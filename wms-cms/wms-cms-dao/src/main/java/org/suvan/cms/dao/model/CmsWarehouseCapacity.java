@@ -25,7 +25,7 @@ public class CmsWarehouseCapacity implements Serializable {
     private Integer warehouseId;
 
     /**
-     * 使用面积（货品表 size * count）
+     * 该类货品已使用仓库面积（货品表 size * count）
      *
      * @mbg.generated
      */

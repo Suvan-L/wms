@@ -6,8 +6,8 @@ import org.suvan.cms.dao.model.CmsSupplier;
 import org.suvan.cms.dao.model.CmsSupplierExample;
 
 /**
-* 降级实现CmsSupplierService接口
-* Created by shuzheng on 2018/4/6.
+* 降级实现 CmsSupplierService 接口
+* Created by suvan on 2018/4/7.
 */
 public class CmsSupplierServiceMock extends BaseServiceMock<CmsSupplierMapper, CmsSupplier, CmsSupplierExample> implements CmsSupplierService {
 

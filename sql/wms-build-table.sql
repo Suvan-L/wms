@@ -100,7 +100,7 @@ CREATE TABLE `upms_permission` (
   `ctime` bigint(20) DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COMMENT='用户权限管理系统 - 权限表';
 
 -- 角色
 DROP TABLE IF EXISTS `upms_role`;
@@ -121,7 +121,7 @@ CREATE TABLE `upms_role_permission` (
   `role_id` int(10) unsigned NOT NULL COMMENT '角色编号（角色表 id）',
   `permission_id` int(10) unsigned NOT NULL COMMENT '权限编号（权限表 id）',
   PRIMARY KEY (`role_permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COMMENT='用戶限管理系统 - 角色 - 权限 - 关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=300 DEFAULT CHARSET=utf8mb4 COMMENT='用戶限管理系统 - 角色 - 权限 - 关联表';
 
 -- 用户
 DROP TABLE IF EXISTS `upms_user`;

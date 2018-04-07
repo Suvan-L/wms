@@ -6,8 +6,8 @@ import org.suvan.cms.dao.model.CmsWarehouseCapacity;
 import org.suvan.cms.dao.model.CmsWarehouseCapacityExample;
 
 /**
-* 降级实现CmsWarehouseCapacityService接口
-* Created by shuzheng on 2018/4/6.
+* 降级实现 CmsWarehouseCapacityService 接口
+* Created by suvan on 2018/4/7.
 */
 public class CmsWarehouseCapacityServiceMock extends BaseServiceMock<CmsWarehouseCapacityMapper, CmsWarehouseCapacity, CmsWarehouseCapacityExample> implements CmsWarehouseCapacityService {
 

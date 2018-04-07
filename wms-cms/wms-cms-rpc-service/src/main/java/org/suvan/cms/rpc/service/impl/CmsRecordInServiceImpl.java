@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* CmsRecordInService实现
-*
+* CmsRecordInService 实现类
+* Created by suvan on 2018/4/7.
 */
 @Service
 @Transactional

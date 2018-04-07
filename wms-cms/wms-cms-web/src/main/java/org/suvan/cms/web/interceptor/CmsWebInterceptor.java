@@ -1,18 +1,13 @@
 package org.suvan.cms.web.interceptor;
 
-import org.suvan.cms.dao.model.CmsMenu;
-import org.suvan.cms.dao.model.CmsMenuExample;
-import org.suvan.cms.rpc.api.CmsMenuService;
-import org.suvan.common.util.PropertiesFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.suvan.common.util.PropertiesFileUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 公共拦截器
@@ -21,8 +16,6 @@ public class CmsWebInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CmsWebInterceptor.class);
 
-    @Autowired
-    private CmsMenuService cmsMenuService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -35,11 +28,10 @@ public class CmsWebInterceptor extends HandlerInterceptorAdapter {
         String uiPath = PropertiesFileUtil.getInstance().get("wms.ui.path");
         request.setAttribute("appName", appName);
         request.setAttribute("uiPath", uiPath);
+
         // 菜单
-        CmsMenuExample cmsMenuExample = new CmsMenuExample();
-        cmsMenuExample.setOrderByClause("orders asc");
-        List<CmsMenu> menus = cmsMenuService.selectByExample(cmsMenuExample);
-        request.setAttribute("menus", menus);
+
+
         return true;
     }
 

@@ -14,24 +14,20 @@
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
 
-    <!-- 文章 -->
-    <dubbo:reference id="cmsArticleService" interface="org.suvan.cms.rpc.api.CmsArticleService" mock="true"/>
-    <!-- 类目 -->
-    <dubbo:reference id="cmsCategoryService" interface="org.suvan.cms.rpc.api.CmsCategoryService" mock="true"/>
-    <!-- 评论 -->
-    <dubbo:reference id="cmsCommentService" interface="org.suvan.cms.rpc.api.CmsCommentService" mock="true"/>
-    <!-- 标签 -->
-    <dubbo:reference id="cmsTagService" interface="org.suvan.cms.rpc.api.CmsTagService" mock="true"/>
-    <!-- 专题 -->
-    <dubbo:reference id="cmsTopicService" interface="org.suvan.cms.rpc.api.CmsTopicService" mock="true"/>
-    <!-- 菜单 -->
-    <dubbo:reference id="cmsMenuService" interface="org.suvan.cms.rpc.api.CmsMenuService" mock="true"/>
-    <!-- 单页 -->
-    <dubbo:reference id="cmsPageService" interface="org.suvan.cms.rpc.api.CmsPageService" mock="true"/>
-    <!-- 设置 -->
-    <dubbo:reference id="cmsSettingService" interface="org.suvan.cms.rpc.api.CmsSettingService" mock="true"/>
-    <!-- 系统 -->
-    <dubbo:reference id="cmsSystemService" interface="org.suvan.cms.rpc.api.CmsSystemService" mock="true"/>
+    <!-- 供应商 -->
+    <dubbo:reference id="cmsSupplierService" interface="org.suvan.cms.rpc.api.CmsSupplierService" mock="true"/>
+    <!-- 客户 -->
+    <dubbo:reference id="cmsCustomerService" interface="org.suvan.cms.rpc.api.CmsCustomerService" mock="true"/>
+    <!-- 货物 -->
+    <dubbo:reference id="cmsGoodsService" interface="org.suvan.cms.rpc.api.CmsGoodsService" mock="true"/>
+    <!-- 仓库 -->
+    <dubbo:reference id="cmsWarehouseService" interface="org.suvan.cms.rpc.api.CmsWarehouseService" mock="true"/>
+    <!-- 仓库容量 -->
+    <dubbo:reference id="cmsWarehouseCapacityService" interface="org.suvan.cms.rpc.api.CmsWarehouseCapacityService" mock="true"/>
+    <!-- 入库记录 -->
+    <dubbo:reference id="cmsRecordInService" interface="org.suvan.cms.rpc.api.CmsRecordInService" mock="true"/>
+    <!-- 出库记录 -->
+    <dubbo:reference id="cmsRecordOutService" interface="org.suvan.cms.rpc.api.CmsRecordOutService" mock="true"/>
 
     <!-- 接口服务 -->
     <dubbo:reference id="upmsApiService" interface="org.suvan.upms.rpc.api.UpmsApiService" mock="true"/>
