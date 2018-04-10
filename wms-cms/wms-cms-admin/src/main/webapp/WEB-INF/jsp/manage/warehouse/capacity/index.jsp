@@ -25,7 +25,7 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/manage/supplier/list',
+		url: '${basePath}/manage/warehouse/capacity/list',
 		height: getHeight(),
 		striped: true,
 		search: true,
@@ -49,20 +49,16 @@ $(function() {
 		toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
-			{field: 'goodsId', title: '货物编号', sortable: true, align: 'center'},
-			{field: 'warehouseId', title: '仓库编号'},
-			{field: 'useArea', title: '已使用面积'},
+			{field: 'warehouseCapacityId', title: '编号', sortable: true, align: 'center'},
+			{field: 'goodsId', title: '货物编号', align: 'center'},
+            {field: 'goodsName', title: '货物名称'},
+            {field: 'goodsCount', title: '货物总数'},
+			{field: 'warehouseCapacityUseArea', title: '货物总占地面积'},
+            {field: 'warehouseId', title: '仓库编号', align: 'center'},
+            {field: 'warehouseAddress', title: '仓库地址'},
 		]
 	});
 });
-// 格式化操作按钮
-function actionFormatter(value, row, index) {
-    return [
-        '<a class="update" href="javascript:;" onclick="updateAction()" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
-        '<a class="delete" href="javascript:;" onclick="deleteAction()" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
-    ].join('');
-}
-
 </script>
 </body>
 </html>

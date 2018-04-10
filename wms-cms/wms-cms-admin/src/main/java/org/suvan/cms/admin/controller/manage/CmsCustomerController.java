@@ -42,11 +42,11 @@ public class CmsCustomerController extends BaseController {
 	@Autowired
 	private CmsCustomerService cmsCustomerService;
 
-	@ApiOperation(value = "客户信息")
+	@ApiOperation(value = "客户信息页面")
 	@RequiresPermissions("cms:customer:read")
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index() {
-		return "/manage/supplier/index.jsp";
+		return "/manage/customer/index.jsp";
 	}
 
 	@ApiOperation(value = "客户信息列表")
@@ -59,43 +59,43 @@ public class CmsCustomerController extends BaseController {
 			@RequestParam(required = false, value = "sort") String sort,
 			@RequestParam(required = false, value = "order") String order) {
 		CmsCustomerExample cmsCustomerExample = new CmsCustomerExample();
-		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsCustomerExample.setOrderByClause(sort + " " + order);
-		}
+
+		//暂时忽略排序功能
+		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+		//	cmsCustomerExample.setOrderByClause(sort + " " + order);
+		//}
+
 		List<CmsCustomer> rows = cmsCustomerService.selectByExampleForOffsetPage(cmsCustomerExample, offset, limit);
 		long total = cmsCustomerService.countByExample(cmsCustomerExample);
+
 		Map<String, Object> result = new HashMap<>(2);
-		result.put("rows", rows);
-		result.put("total", total);
+            result.put("rows", rows);
+            result.put("total", total);
+
 		return result;
 	}
 
-	@ApiOperation(value = "添加客户")
+	@ApiOperation(value = "新增客户 GET")
 	@RequiresPermissions("cms:customer:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
 		CmsCustomerExample cmsCustomerExample = new CmsCustomerExample();
-		cmsCustomerExample.setOrderByClause("supplier_id DESC");
+            cmsCustomerExample.setOrderByClause("customer_id DESC");
+
 		List<CmsCustomer> cmsTopics = cmsCustomerService.selectByExample(cmsCustomerExample);
-		modelMap.put("cmsTopics", cmsTopics);
-		return "/manage/supplier/create.jsp";
+            modelMap.put("cmsTopics", cmsTopics);
+
+		return "/manage/customer/create.jsp";
 	}
 
-	@ApiOperation(value = "新增文章")
+	@ApiOperation(value = "新增客户 POST")
 	@RequiresPermissions("cms:customer:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public Object create(CmsCustomer cmsCustomer) {
-		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsCustomer.getCompany(), new LengthValidator(1, 30, "公司"))
-				.doValidate()
-				.result(ResultCollectors.toComplex());
-		if (!result.isSuccess()) {
-			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
-		}
-		long time = System.currentTimeMillis();
-		cmsCustomer.setCtime(time);
+        cmsCustomer.setCtime(System.currentTimeMillis());
 		int count = cmsCustomerService.insertSelective(cmsCustomer);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
@@ -108,14 +108,13 @@ public class CmsCustomerController extends BaseController {
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
-	@ApiOperation(value = "修改客户信息")
+	@ApiOperation(value = "修改客户信息 GET")
 	@RequiresPermissions("cms:customer:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") int id, ModelMap modelMap) {
-		CmsCustomerExample cmsCustomerExample = new CmsCustomerExample();
-		cmsCustomerExample.setOrderByClause("ctime desc");
 		CmsCustomer cmsCustomer = cmsCustomerService.selectByPrimaryKey(id);
-		modelMap.put("supplier", cmsCustomer);
+            modelMap.put("customer", cmsCustomer);
+
 		return "/manage/customer/update.jsp";
 	}
 
@@ -124,16 +123,9 @@ public class CmsCustomerController extends BaseController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Object update(@PathVariable("id") int id, CmsCustomer cmsCustomer) {
-		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsCustomer.getCompany(), new LengthValidator(1, 30, "公司"))
-				.doValidate()
-				.result(ResultCollectors.toComplex());
-		if (!result.isSuccess()) {
-			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
-		}
 		cmsCustomer.setCustomerId(id);
 		int count = cmsCustomerService.updateByPrimaryKeySelective(cmsCustomer);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
-
 }

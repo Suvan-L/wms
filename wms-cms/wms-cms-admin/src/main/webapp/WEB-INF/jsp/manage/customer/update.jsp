@@ -8,6 +8,26 @@
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <div id="updateDialog" class="crudDialog">
 	<form id="updateForm" method="post">
+         <div class="form-group">
+			<label for="company">公司名称</label>
+			<input id="company" type="text" class="form-control" name="company" maxlength="30" value="${customer.company}">
+		</div>
+		<div class="form-group">
+			<label for="address">地址</label>
+			<input id="address" type="text" class="form-control" name="address" maxlength="100" value="${customer.address}">
+		</div>
+		<div class="form-group">
+			<label for="name">联系人</label>
+			<input id="name" type="text" class="form-control" name="name" maxlength="10" value="${customer.name}">
+		</div>
+        <div class="form-group">
+			<label for="tel">电话</label>
+			<input id="tel" type="text" class="form-control" name="tel" maxlength="20" value="${customer.tel}">
+		</div>
+        <div class="form-group">
+			<label for="email">邮箱</label>
+			<input id="email" type="text" class="form-control" name="email" maxlength="35" value="${customer.email}">
+		</div>
 		<div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="updateSubmit();">保存</a>
 			<a class="waves-effect waves-button" href="javascript:;" onclick="updateDialog.close();">取消</a>
@@ -18,7 +38,7 @@
 function updateSubmit() {
     $.ajax({
         type: 'post',
-        url: '${basePath}/manage/customer/update/${article.articleId}',
+        url: '${basePath}/manage/customer/update/${customer.customerId}',
         data: $('#updateForm').serialize(),
         beforeSend: function() {
 			if ($('#title').val() == '') {

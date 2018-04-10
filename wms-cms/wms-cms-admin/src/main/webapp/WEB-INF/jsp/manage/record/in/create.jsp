@@ -8,10 +8,28 @@
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <div id="createDialog" class="crudDialog">
 	<form id="createForm" method="post">
-		<div class="form-group text-right dialog-buttons">
+        <div class="form-group">
+			<label for="supplierId">供应商编号（Number）</label>
+			<input id="supplierId" type="text" class="form-control" name="supplierId" maxlength="10">
+		</div>
+         <div class="form-group">
+			<label for="goodsId">货物编号（Number）</label>
+			<input id="goodsId" type="text" class="form-control" name="goodsId" maxlength="10">
+		</div>
+         <div class="form-group">
+			<label for="warehouseId">仓库编号（Number）</label>
+			<input id="warehouseId" type="text" class="form-control" name="warehouseId" maxlength="10">
+		</div>
+         <div class="form-group">
+			<label for="amount">入库数量（Number）</label>
+			<input id="amount" type="text" class="form-control" name="amount" maxlength="10">
+		</div>
+
+        <div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
 			<a class="waves-effect waves-button" href="javascript:;" onclick="createDialog.close();">取消</a>
 		</div>
+    </form>
 </div>
 <script>
 function createSubmit() {

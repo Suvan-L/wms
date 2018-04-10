@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * 测试任务
- * Created by zhangshuzheng on 2016/11/14.
  */
 public class LongSchedule implements IScheduleTaskDealSingle<Long> {
 

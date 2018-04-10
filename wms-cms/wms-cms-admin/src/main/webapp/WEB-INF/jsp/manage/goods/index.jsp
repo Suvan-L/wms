@@ -18,9 +18,9 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="cms:article:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加货物</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑货物</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 修改货物</a></shiro:hasPermission>
+		<%--<shiro:hasPermission name="cms:goods:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增货物</a></shiro:hasPermission>--%>
+		<shiro:hasPermission name="cms:goods:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑货物</a></shiro:hasPermission>
+		<%--<shiro:hasPermission name="cms:goods:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除货物</a></shiro:hasPermission>--%>
 	</div>
 	<table id="table"></table>
 </div>
@@ -57,8 +57,8 @@ $(function() {
 			{field: 'goodsId', title: '编号', sortable: true, align: 'center'},
 			{field: 'name', title: '货物名'},
 			{field: 'type', title: '货物类型'},
-			{field: 'size', title: '面积（单个货品）'},
-			{field: 'count', title: '现有数量'},
+            {field: 'count', title: '现有数量'},
+			{field: 'size', title: '单个货品占地面积'}
 		]
 	});
 });
@@ -106,7 +106,7 @@ function updateAction() {
 			animationSpeed: 300,
 			title: '编辑货物',
 			columnClass: 'xlarge',
-			content: 'url:${basePath}/manage/goods/update/' + rows[0].articleId,
+			content: 'url:${basePath}/manage/goods/update/' + rows[0].goodsId,
 			onContentReady: function () {
 				initMaterialInput();
 				$('select').select2();
@@ -144,7 +144,7 @@ function deleteAction() {
 					action: function () {
 						var ids = new Array();
 						for (var i in rows) {
-							ids.push(rows[i].articleId);
+							ids.push(rows[i].goodsId);
 						}
 						$.ajax({
 							type: 'get',

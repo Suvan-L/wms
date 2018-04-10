@@ -22,7 +22,7 @@ public abstract class BaseController {
 	 * 统一异常处理
 	 * @param request
 	 * @param response
-	 * @param exception
+	 * @param exception 
 	 */
 	@ExceptionHandler
 	public String exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {

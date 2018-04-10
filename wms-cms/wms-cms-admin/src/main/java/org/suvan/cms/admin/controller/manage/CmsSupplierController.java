@@ -60,43 +60,41 @@ public class CmsSupplierController extends BaseController {
 			@RequestParam(required = false, value = "sort") String sort,
 			@RequestParam(required = false, value = "order") String order) {
 		CmsSupplierExample cmsSupplierExamples = new CmsSupplierExample();
-		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsSupplierExamples.setOrderByClause(sort + " " + order);
-		}
+
+		//暂时忽略排序功能
+		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+		//	cmsSupplierExamples.setOrderByClause(sort + " " + order);
+		//}
+
 		List<CmsSupplier> rows = cmsSupplierService.selectByExampleForOffsetPage(cmsSupplierExamples, offset, limit);
 		long total = cmsSupplierService.countByExample(cmsSupplierExamples);
+
 		Map<String, Object> result = new HashMap<>(2);
-		result.put("rows", rows);
-		result.put("total", total);
+            result.put("rows", rows);
+            result.put("total", total);
 		return result;
 	}
 
-	@ApiOperation(value = "添加供应商")
+	@ApiOperation(value = "新增供应商 GET")
 	@RequiresPermissions("cms:supplier:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
 		CmsSupplierExample cmsSupplierExample = new CmsSupplierExample();
-		cmsSupplierExample.setOrderByClause("supplier_id DESC");
+            //cmsSupplierExample.setOrderByClause("supplier_id DESC");
+
 		List<CmsSupplier> cmsTopics = cmsSupplierService.selectByExample(cmsSupplierExample);
-		modelMap.put("cmsTopics", cmsTopics);
+            modelMap.put("cmsTopics", cmsTopics);
 		return "/manage/supplier/create.jsp";
 	}
 
-	@ApiOperation(value = "新增文章")
+	@ApiOperation(value = "新增供应商 POST")
 	@RequiresPermissions("cms:supplier:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public Object create(CmsSupplier cmsSupplier) {
-		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsSupplier.getCompany(), new LengthValidator(1, 30, "公司"))
-				.doValidate()
-				.result(ResultCollectors.toComplex());
-		if (!result.isSuccess()) {
-			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
-		}
-		long time = System.currentTimeMillis();
-		cmsSupplier.setCtime(time);
+		cmsSupplier.setCtime(System.currentTimeMillis());
 		int count = cmsSupplierService.insertSelective(cmsSupplier);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
@@ -109,33 +107,24 @@ public class CmsSupplierController extends BaseController {
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
-	@ApiOperation(value = "修改供应商信息")
+	@ApiOperation(value = "修改供应商信息 GET")
 	@RequiresPermissions("cms:supplier:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") int id, ModelMap modelMap) {
-		CmsSupplierExample cmsTopicExample = new CmsSupplierExample();
-		cmsTopicExample.setOrderByClause("ctime desc");
-		List<CmsSupplier> cmsTopics = cmsSupplierService.selectByExample(cmsTopicExample);
 		CmsSupplier cmsSupplier = cmsSupplierService.selectByPrimaryKey(id);
-		modelMap.put("supplier", cmsSupplier);
+            modelMap.put("supplier", cmsSupplier);
 		return "/manage/supplier/update.jsp";
 	}
 
-	@ApiOperation(value = "修改供应商信息")
+	@ApiOperation(value = "修改供应商信息 POST")
 	@RequiresPermissions("cms:supplier:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Object update(@PathVariable("id") int id, CmsSupplier cmsSupplier) {
-		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsSupplier.getCompany(), new LengthValidator(1, 30, "公司"))
-				.doValidate()
-				.result(ResultCollectors.toComplex());
-		if (!result.isSuccess()) {
-			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
-		}
 		cmsSupplier.setSupplierId(id);
 		int count = cmsSupplierService.updateByPrimaryKeySelective(cmsSupplier);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
-
 }
+

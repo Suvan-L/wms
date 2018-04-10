@@ -18,7 +18,7 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="cms:article:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加出库记录</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:record:out:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增出库记录</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>
@@ -51,23 +51,19 @@ $(function() {
 		maintainSelected: true,
 		toolbar: '#toolbar',
 		columns: [
-			{field: 'ck', checkbox: true},
-			{field: 'recordOutId', title: '编号', sortable: true, align: 'center'},
-			{field: 'customerId', title: '客户编号'},
-			{field: 'goodsId', title: '货物编号'},
-			{field: 'warehouseId', title: '仓库编号'},
-			{field: 'amount', title: '出库数量'},
-			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter'},
+            {field: 'ck', checkbox: true},
+            {field: 'recordOutId', title: '编号', sortable: true, align: 'center'},
+            {field: 'goodsId', title: '货物编号', align: 'center'},
+            {field: 'goodsName', title: '商品名称'},
+            {field: 'recordOutAmount', title: '出库数量'},
+            {field: 'customerId', title: '客户编号', align: 'center'},
+            {field: 'customerCompany', title: '客户公司名称'},
+            {field: 'warehouseId', title: '仓库编号', align: 'center'},
+            {field: 'warehouseAddress', title: '仓库地址'},
+            {field: 'recordOutCtime', title: '出库时间', formatter: 'timeFormatter'}
 		]
 	});
 });
-// 格式化操作按钮
-function actionFormatter(value, row, index) {
-    return [
-        '<a class="update" href="javascript:;" onclick="updateAction()" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
-        '<a class="delete" href="javascript:;" onclick="deleteAction()" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
-    ].join('');
-}
 
 // 格式化时间
 function timeFormatter(value , row, index) {

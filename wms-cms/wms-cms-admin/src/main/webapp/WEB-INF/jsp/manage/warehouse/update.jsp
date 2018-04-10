@@ -8,6 +8,23 @@
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <div id="updateDialog" class="crudDialog">
 	<form id="updateForm" method="post">
+        <div class="form-group">
+			<label for="address">仓库地址</label>
+			<input id="address" type="text" class="form-control" name="address" maxlength="100" value="${warehouse.address}">
+		</div>
+        <div class="form-group">
+			<label for="area">区域面积（Number）</label>
+			<input id="area" type="text" class="form-control" name="area" maxlength="10" value="${warehouse.area}">
+		</div>
+         <div class="form-group">
+			<label for="admin">现任管理员</label>
+			<input id="admin" type="text" class="form-control" name="admin" maxlength="20" value="${warehouse.admin}">
+		</div>
+         <div class="form-group">
+			<label for="description">描述</label>
+			<input id="description" type="text" class="form-control" name="description" maxlength="1000" value="${warehouse.description}">
+		</div>
+
 		<div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="updateSubmit();">保存</a>
 			<a class="waves-effect waves-button" href="javascript:;" onclick="updateDialog.close();">取消</a>
@@ -18,7 +35,7 @@
 function updateSubmit() {
     $.ajax({
         type: 'post',
-        url: '${basePath}/manage/supplier/update/${article.articleId}',
+        url: '${basePath}/manage/supplier/update/${warehouse.warehouseId}',
         data: $('#updateForm').serialize(),
         beforeSend: function() {
 			if ($('#title').val() == '') {

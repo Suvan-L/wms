@@ -13,5 +13,6 @@ generatorConfig.xml
 *.lock
 /build/
 *.settings
+rebel.xml
 
 环境启动脚本

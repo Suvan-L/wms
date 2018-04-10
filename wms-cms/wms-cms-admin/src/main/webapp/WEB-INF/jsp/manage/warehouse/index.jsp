@@ -18,9 +18,9 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="cms:article:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加仓库</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑仓库</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 修改仓库</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:warehouse:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增仓库</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:warehouse:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑仓库</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:warehouse:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除仓库</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>
@@ -56,10 +56,11 @@ $(function() {
 			{field: 'ck', checkbox: true},
 			{field: 'warehouseId', title: '编号', sortable: true, align: 'center'},
 			{field: 'address', title: '地址'},
-			{field: 'status', title: '仓库状态'},
-			{field: 'area', title: '区域面积'},
-			{field: 'goodsArea', title: '已存放所有货品面积总和'},
+            {field: 'area', title: '区域面积'},
+            {field: 'goodsArea', title: '已存放所有货品面积总和'},
+			{field: 'status', title: '仓库状态（已用百分比）'},
 			{field: 'admin', title: '现任管理员'},
+            {field: 'description', title: '描述'}
 		]
 	});
 });
@@ -111,7 +112,7 @@ function updateAction() {
 			animationSpeed: 300,
 			title: '编辑仓库',
 			columnClass: 'xlarge',
-			content: 'url:${basePath}/manage/warehouse/update/' + rows[0].articleId,
+			content: 'url:${basePath}/manage/warehouse/update/' + rows[0].warehouseId,
 			onContentReady: function () {
 				initMaterialInput();
 				$('select').select2();
@@ -149,7 +150,7 @@ function deleteAction() {
 					action: function () {
 						var ids = new Array();
 						for (var i in rows) {
-							ids.push(rows[i].articleId);
+							ids.push(rows[i].warehouseId);
 						}
 						$.ajax({
 							type: 'get',

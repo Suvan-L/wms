@@ -18,9 +18,9 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="cms:article:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加供应商</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑供应商</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 修改供应商</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:supplier:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增供应商</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:supplier:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑供应商</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:supplier:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除供应商</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>
@@ -60,7 +60,7 @@ $(function() {
 			{field: 'name', title: '联系人'},
 			{field: 'tel', title: '电话'},
 			{field: 'email', title: '邮箱'},
-			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter'},
+			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter'}
 		]
 	});
 });
@@ -112,7 +112,7 @@ function updateAction() {
 			animationSpeed: 300,
 			title: '编辑供应商',
 			columnClass: 'xlarge',
-			content: 'url:${basePath}/manage/supplier/update/' + rows[0].articleId,
+			content: 'url:${basePath}/manage/supplier/update/' + rows[0].supplierId,
 			onContentReady: function () {
 				initMaterialInput();
 				$('select').select2();
@@ -150,7 +150,7 @@ function deleteAction() {
 					action: function () {
 						var ids = new Array();
 						for (var i in rows) {
-							ids.push(rows[i].articleId);
+							ids.push(rows[i].supplierId);
 						}
 						$.ajax({
 							type: 'get',

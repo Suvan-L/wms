@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 import org.suvan.common.validator.LengthValidator;
 import org.suvan.upms.common.constant.UpmsResult;
 import org.suvan.upms.common.constant.UpmsResultConstant;
@@ -87,7 +88,7 @@ public class UpmsRoleController extends BaseController {
             @RequestParam(required = false, value = "order") String order) {
         UpmsRoleExample upmsRoleExample = new UpmsRoleExample();
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            upmsRoleExample.setOrderByClause(sort + " " + order);
+            upmsRoleExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
         }
         if (StringUtils.isNotBlank(search)) {
             upmsRoleExample.or()

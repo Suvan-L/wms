@@ -24,6 +24,7 @@ import org.suvan.cms.dao.model.CmsWarehouseExample;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
 import org.suvan.common.validator.LengthValidator;
+import org.suvan.common.validator.NotNullValidator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,40 +61,51 @@ public class CmsWarehouseController extends BaseController {
 			@RequestParam(required = false, value = "sort") String sort,
 			@RequestParam(required = false, value = "order") String order) {
 		CmsWarehouseExample cmsWarehouseExample = new CmsWarehouseExample();
-		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsWarehouseExample.setOrderByClause(sort + " " + order);
-		}
+
+		//暂时忽略排序功能
+		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+		//	cmsWarehouseExample.setOrderByClause(sort + " " + order);
+		//}
+
 		List<CmsWarehouse> rows = cmsWarehouseService.selectByExampleForOffsetPage(cmsWarehouseExample, offset, limit);
 		long total = cmsWarehouseService.countByExample(cmsWarehouseExample);
+
 		Map<String, Object> result = new HashMap<>(2);
-		result.put("rows", rows);
-		result.put("total", total);
+            result.put("rows", rows);
+            result.put("total", total);
 		return result;
 	}
 
-	@ApiOperation(value = "添加仓库")
+	@ApiOperation(value = "新增仓库 GET")
 	@RequiresPermissions("cms:warehouse:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
 		CmsWarehouseExample cmsWarehouseExample = new CmsWarehouseExample();
-		cmsWarehouseExample.setOrderByClause("warehouse_id DESC");
+
 		List<CmsWarehouse> cmsWarehouseList = cmsWarehouseService.selectByExample(cmsWarehouseExample);
-		modelMap.put("cmsWarehouseList", cmsWarehouseExample);
+		    modelMap.put("cmsWarehouseList", cmsWarehouseList);
 		return "/manage/warehouse/create.jsp";
 	}
 
-	@ApiOperation(value = "新增文章")
+	@ApiOperation(value = "新增仓库 POST")
 	@RequiresPermissions("cms:warehouse:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public Object create(CmsWarehouse cmsWarehouse) {
+	    //校验规则
 		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsWarehouse.getAddress(), new LengthValidator(1, 100, "地址"))
+                .on(cmsWarehouse.getAddress(), new NotNullValidator("仓库地址"))
+                .on(cmsWarehouse.getAdmin(), new NotNullValidator("现任管理员"))
 				.doValidate()
 				.result(ResultCollectors.toComplex());
 		if (!result.isSuccess()) {
 			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
 		}
+
+		//设置默认值
+		cmsWarehouse.setGoodsArea(0);
+		cmsWarehouse.setStatus(0.0);
+
 		int count = cmsWarehouseService.insertSelective(cmsWarehouse);
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
@@ -107,32 +119,23 @@ public class CmsWarehouseController extends BaseController {
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
-	@ApiOperation(value = "修改仓库信息")
+	@ApiOperation(value = "修改仓库信息 GET")
 	@RequiresPermissions("cms:warehouse:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") int id, ModelMap modelMap) {
-		CmsWarehouseExample cmsWarehouseExample = new CmsWarehouseExample();
-		cmsWarehouseExample.setOrderByClause("area desc");
 		CmsWarehouse cmsWarehouse = cmsWarehouseService.selectByPrimaryKey(id);
-		modelMap.put("supplier", cmsWarehouse);
+            modelMap.put("warehouse", cmsWarehouse);
 		return "/manage/warehouse/update.jsp";
 	}
 
-	@ApiOperation(value = "修改仓库信息")
+	@ApiOperation(value = "修改仓库信息 POST")
 	@RequiresPermissions("cms:warehouse:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Object update(@PathVariable("id") int id, CmsWarehouse cmsWarehouse) {
-		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsWarehouse.getAddress(), new LengthValidator(1, 100, "地址"))
-				.doValidate()
-				.result(ResultCollectors.toComplex());
-		if (!result.isSuccess()) {
-			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
-		}
 		cmsWarehouse.setWarehouseId(id);
 		int count = cmsWarehouseService.updateByPrimaryKeySelective(cmsWarehouse);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
-
 }

@@ -27,5 +27,4 @@ public class NotNullValidator extends ValidatorHandler<String> implements Valida
         }
         return true;
     }
-
 }

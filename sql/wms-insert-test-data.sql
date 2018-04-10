@@ -50,14 +50,14 @@ INSERT INTO `upms_organization` VALUES ('5', null, '海外分部', '国外业务
 -- 【系统权限表（权限管理模块 & 库存管理模块）】
 -- 【1. 权限管理模块】
 -- 系统 & 组织
-  INSERT INTO `upms_permission` VALUES ('1', '1', '0', '系统组织管理', '1', '', '', 'zmdi zmdi-accounts-list', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('1', '1', '0', '系统组织管理', '1', '', '', 'zmdi zmdi-accounts-list', '1', '1', '1');
 -- 系统
 INSERT INTO `upms_permission` VALUES ('11', '1', '1', '系统管理', '2', 'upms:system:read', '/manage/system/index', '', '1', '1', '2');
 INSERT INTO `upms_permission` VALUES ('12', '1', '11', '新增系统', '3', 'upms:system:create', '/manage/system/create', 'zmdi zmdi-plus', '1', '1', '1');
 INSERT INTO `upms_permission` VALUES ('13', '1', '11', '编辑系统', '3', 'upms:system:update', '/manage/system/update', 'zmdi zmdi-edit', '1', '1', '2');
 INSERT INTO `upms_permission` VALUES ('14', '1', '11', '删除系统', '3', 'upms:system:delete', '/manage/system/delete', 'zmdi zmdi-close', '1', '1', '3');
 -- 组织
-INSERT INTO `upms_permission` VALUES ('21', '1', '1', '组织管理', '2', 'upms:organization:read', '/manage/organization/index', '', '1', '3', '3');
+INSERT INTO `upms_permission` VALUES ('21', '1', '1', '组织管理', '2', 'upms:organization:read', '/manage/organization/index', '', '1', '1', '3');
 INSERT INTO `upms_permission` VALUES ('22', '1', '21', '新增组织', '3', 'upms:organization:create', '/manage/organization/create', 'zmdi zmdi-plus', '1', '1', '1');
 INSERT INTO `upms_permission` VALUES ('23', '1', '21', '编辑组织', '3', 'upms:organization:update', '/manage/organization/update', 'zmdi zmdi-edit', '1', '1', '2');
 INSERT INTO `upms_permission` VALUES ('24', '1', '21', '删除组织', '3', 'upms:organization:delete', '/manage/organization/delete', 'zmdi zmdi-close', '1', '1', '3');
@@ -97,24 +97,24 @@ INSERT INTO `upms_permission` VALUES ('72', '1', '71', '删除日志', '3', 'upm
 INSERT INTO `upms_permission` VALUES ('100', '2', '0', '库存管理', '1', '', '', 'zmdi zmdi-group', '1', '1', '1');
 -- 供应商
 INSERT INTO `upms_permission` VALUES ('110', '2', '100', '供应商', '2', 'cms:supplier:read', '/manage/supplier/index', '', '1', '1', '2');
-INSERT INTO `upms_permission` VALUES ('111', '2', '110', '添加供应商', '3', 'cms:supplier:create', '/manage/supplier/create', '', '1', '1', '1');
-INSERT INTO `upms_permission` VALUES ('112', '2', '110', '编辑供应商', '3', 'cms:supplier:update', '/manage/supplier/update', '', '1', '1', '2');
-INSERT INTO `upms_permission` VALUES ('113', '2', '110', '删除供应商', '3', 'cms:supplier:delete', '/manage/supplier/delete', '', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('111', '2', '110', '新增供应商', '3', 'cms:supplier:create', '/manage/supplier/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('112', '2', '110', '编辑供应商', '3', 'cms:supplier:update', '/manage/supplier/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('113', '2', '110', '删除供应商', '3', 'cms:supplier:delete', '/manage/supplier/delete', 'zmdi zmdi-close', '1', '1', '3');
 -- 客户
 INSERT INTO `upms_permission` VALUES ('210', '2', '100', '客户', '2', 'cms:customer:read', '/manage/customer/index', '', '1', '1', '3');
-INSERT INTO `upms_permission` VALUES ('211', '2', '210', '添加客户', '3', 'cms:customer:create', '/manage/customer/create', '', '1', '1', '1');
-INSERT INTO `upms_permission` VALUES ('212', '2', '210', '编辑客户', '3', 'cms:customer:update', '/manage/customer/update', '', '1', '1', '2');
-INSERT INTO `upms_permission` VALUES ('213', '2', '210', '删除客户', '3', 'cms:customer:delete', '/manage/customer/delete', '', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('211', '2', '210', '新增客户', '3', 'cms:customer:create', '/manage/customer/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('212', '2', '210', '编辑客户', '3', 'cms:customer:update', '/manage/customer/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('213', '2', '210', '删除客户', '3', 'cms:customer:delete', '/manage/customer/delete', 'zmdi zmdi-close', '1', '1', '3');
 -- 货物
-INSERT INTO `upms_permission` VALUES ('310', '2', '100', '货物', '2', 'cms:customer:read', '/manage/goods/index', '', '1', '1', '4');
-INSERT INTO `upms_permission` VALUES ('311', '2', '310', '添加货物', '3', 'cms:goods:create', '/manage/goods/create', '', '1', '1', '1');
-INSERT INTO `upms_permission` VALUES ('312', '2', '310', '编辑货物', '3', 'cms:goods:update', '/manage/goods/update', '', '1', '1', '2');
-INSERT INTO `upms_permission` VALUES ('313', '2', '310', '删除货物', '3', 'cms:goods:delete', '/manage/goods/delete', '', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('310', '2', '100', '货物', '2', 'cms:goods:read', '/manage/goods/index', '', '1', '1', '4');
+INSERT INTO `upms_permission` VALUES ('311', '2', '310', '新增货物', '3', 'cms:goods:create', '/manage/goods/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('312', '2', '310', '编辑货物', '3', 'cms:goods:update', '/manage/goods/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('313', '2', '310', '删除货物', '3', 'cms:goods:delete', '/manage/goods/delete', 'zmdi zmdi-close', '1', '1', '3');
 -- 仓库
 INSERT INTO `upms_permission` VALUES ('410', '2', '100', '仓库', '2', 'cms:warehouse:read', '/manage/warehouse/index', '', '1', '1', '5');
-INSERT INTO `upms_permission` VALUES ('411', '2', '410', '添加仓库', '3', 'cms:warehouse:create', '/manage/warehouse/create', '', '1', '1', '1');
-INSERT INTO `upms_permission` VALUES ('412', '2', '410', '编辑仓库', '3', 'cms:warehouse:update', '/manage/warehouse/update', '', '1', '1', '2');
-INSERT INTO `upms_permission` VALUES ('413', '2', '410', '删除仓库', '3', 'cms:warehouse:delete', '/manage/warehouse/delete', '', '1', '1', '3');
+INSERT INTO `upms_permission` VALUES ('411', '2', '410', '新增仓库', '3', 'cms:warehouse:create', '/manage/warehouse/create', 'zmdi zmdi-plus', '1', '1', '1');
+INSERT INTO `upms_permission` VALUES ('412', '2', '410', '编辑仓库', '3', 'cms:warehouse:update', '/manage/warehouse/update', 'zmdi zmdi-edit', '1', '1', '2');
+INSERT INTO `upms_permission` VALUES ('413', '2', '410', '删除仓库', '3', 'cms:warehouse:delete', '/manage/warehouse/delete', 'zmdi zmdi-close', '1', '1', '3');
 -- 仓库容量
 INSERT INTO `upms_permission` VALUES ('500', '2', '0', '库存监控', '1', '', '', 'zmdi zmdi-eye', '1', '1', '1');
 INSERT INTO `upms_permission` VALUES ('510', '2', '500', '仓库容量实时监控', '2', 'cms:warehouse:capacity:read', '/manage/warehouse/capacity/index', '', '1', '1', '2');

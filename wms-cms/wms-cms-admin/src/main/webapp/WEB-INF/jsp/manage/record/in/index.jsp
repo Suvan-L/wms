@@ -18,7 +18,7 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="cms:article:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加入库记录</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:record:in:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增入库记录</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>
@@ -52,20 +52,22 @@ $(function() {
 		toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
-			{field: 'recordInId', title: '编号', sortable: true, align: 'center'},
-			{field: 'supplierId', title: '供应商编号'},
-			{field: 'goodsId', title: '货物编号'},
-			{field: 'warehouseId', title: '仓库编号'},
-			{field: 'amount', title: '入库数量'},
-			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter'},
+            {field: 'recordInId', title: '编号', sortable: true, align: 'center'},
+            {field: 'goodsId', title: '货物编号', align: 'center'},
+            {field: 'goodsName', title: '商品名称'},
+            {field: 'recordInAmount', title: '入库数量'},
+            {field: 'supplierId', title: '供应商编号', align: 'center'},
+            {field: 'supplierCompany', title: '供应商公司名称'},
+            {field: 'warehouseId', title: '仓库编号', align: 'center'},
+            {field: 'warehouseAddress', title: '仓库地址'},
+            {field: 'recordInCtime', title: '入库时间', formatter: 'timeFormatter'},
 		]
 	});
 });
 // 格式化操作按钮
 function actionFormatter(value, row, index) {
     return [
-        '<a class="update" href="javascript:;" onclick="updateAction()" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
-        '<a class="delete" href="javascript:;" onclick="deleteAction()" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
+        '<a class="update" href="javascript:;" onclick="updateAction()" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　'
     ].join('');
 }
 

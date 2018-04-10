@@ -24,6 +24,7 @@ import org.suvan.cms.dao.model.CmsGoodsExample;
 import org.suvan.cms.rpc.api.CmsGoodsService;
 import org.suvan.common.base.BaseController;
 import org.suvan.common.validator.LengthValidator;
+import org.suvan.common.validator.NotNullValidator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class CmsGoodsController extends BaseController {
 	@RequiresPermissions("cms:goods:read")
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index() {
-		return "/manage/supplier/index.jsp";
+		return "/manage/goods/index.jsp";
 	}
 
 	@ApiOperation(value = "货物信息列表")
@@ -60,42 +61,51 @@ public class CmsGoodsController extends BaseController {
 			@RequestParam(required = false, value = "sort") String sort,
 			@RequestParam(required = false, value = "order") String order) {
 		CmsGoodsExample cmsGoodsExample = new CmsGoodsExample();
-		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsGoodsExample.setOrderByClause(sort + " " + order);
-		}
+
+		////暂时忽略排序功能
+		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+		//	cmsGoodsExample.setOrderByClause(sort + " " + order);
+		//}
+
 		List<CmsGoods> rows = cmsGoodsService.selectByExampleForOffsetPage(cmsGoodsExample, offset, limit);
 		long total = cmsGoodsService.countByExample(cmsGoodsExample);
+
 		Map<String, Object> result = new HashMap<>(2);
-		result.put("rows", rows);
-		result.put("total", total);
+            result.put("rows", rows);
+            result.put("total", total);
 		return result;
 	}
 
-	@ApiOperation(value = "添加货物")
+	@ApiOperation(value = "新增货物 GET")
 	@RequiresPermissions("cms:goods:create")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
 		CmsGoodsExample cmsGoodsExample = new CmsGoodsExample();
-		cmsGoodsExample.setOrderByClause("goods_id DESC");
+            cmsGoodsExample.setOrderByClause("goods_id DESC");
+
 		List<CmsGoods> cmsGoods = cmsGoodsService.selectByExample(cmsGoodsExample);
-		modelMap.put("cmsGoods", cmsGoods);
+            modelMap.put("cmsGoods", cmsGoods);
+
 		return "/manage/goods/create.jsp";
 	}
 
-	@ApiOperation(value = "添加货物")
+	@ApiOperation(value = "添加货物 POST")
 	@RequiresPermissions("cms:goods:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public Object create(CmsGoods cmsGoods) {
+	    //添加校验规则
 		ComplexResult result = FluentValidator.checkAll()
+                .on(cmsGoods.getName(), new NotNullValidator("货物名"))
 				.on(cmsGoods.getName(), new LengthValidator(1, 30, "货物名"))
 				.doValidate()
 				.result(ResultCollectors.toComplex());
 		if (!result.isSuccess()) {
 			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
 		}
-		long time = System.currentTimeMillis();
+
 		int count = cmsGoodsService.insertSelective(cmsGoods);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
@@ -108,31 +118,24 @@ public class CmsGoodsController extends BaseController {
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
 
-	@ApiOperation(value = "修改货物信息")
+	@ApiOperation(value = "修改货物信息 GET")
 	@RequiresPermissions("cms:goods:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") int id, ModelMap modelMap) {
-		CmsGoodsExample cmsGoodsExample = new CmsGoodsExample();
 		CmsGoods cmsGoods = cmsGoodsService.selectByPrimaryKey(id);
-		modelMap.put("goods", cmsGoods);
-		return "/manage/supplier/update.jsp";
+            modelMap.put("goods", cmsGoods);
+
+		return "/manage/goods/update.jsp";
 	}
 
-	@ApiOperation(value = "修改货物信息")
+	@ApiOperation(value = "修改货物信息 POST")
 	@RequiresPermissions("cms:goods:update")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(@PathVariable("id") int id, CmsGoods cmsGoods ) {
-		ComplexResult result = FluentValidator.checkAll()
-				.on(cmsGoods.getName(), new LengthValidator(1, 30, "货物名"))
-				.doValidate()
-				.result(ResultCollectors.toComplex());
-		if (!result.isSuccess()) {
-			return new CmsResult(CmsResultConstant.INVALID_LENGTH, result.getErrors());
-		}
+	public Object update(@PathVariable("id") int id, CmsGoods cmsGoods) {
 		cmsGoods.setGoodsId(id);
 		int count = cmsGoodsService.updateByPrimaryKeySelective(cmsGoods);
+
 		return new CmsResult(CmsResultConstant.SUCCESS, count);
 	}
-
 }

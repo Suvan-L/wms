@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * 服务启动类
+ * 用户权限管理服务
+ *
  * @since suvan modified 2018.04.01
  */
 public class WmsUpmsRpcServiceApplication {

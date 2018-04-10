@@ -1,8 +1,10 @@
 package org.suvan.cms.admin.controller.manage;
 
+import com.alibaba.fastjson.JSONArray;
+import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang.StringUtils;
+import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.suvan.cms.dao.model.CmsGoods;
+import org.suvan.cms.dao.model.CmsWarehouse;
 import org.suvan.cms.dao.model.CmsWarehouseCapacity;
 import org.suvan.cms.dao.model.CmsWarehouseCapacityExample;
+import org.suvan.cms.rpc.api.CmsGoodsService;
 import org.suvan.cms.rpc.api.CmsWarehouseCapacityService;
+import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
 
 import java.util.HashMap;
@@ -31,8 +37,17 @@ public class CmsWarehouseCapacityController extends BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmsWarehouseCapacityController.class);
 
-	@Autowired
 	private CmsWarehouseCapacityService cmsWarehouseCapacityService;
+    private CmsGoodsService cmsGoodsService;
+	private CmsWarehouseService cmsWarehouseService;
+
+	@Autowired
+	public CmsWarehouseCapacityController (CmsWarehouseCapacityService cmsWarehouseCapacityService, CmsGoodsService cmsGoodsService,
+                                           CmsWarehouseService cmsWarehouseService) {
+	    this.cmsWarehouseCapacityService = cmsWarehouseCapacityService;
+	    this.cmsGoodsService = cmsGoodsService;
+	    this.cmsWarehouseService = cmsWarehouseService;
+    }
 
 
 	@ApiOperation(value = "仓库库存信息")
@@ -51,15 +66,40 @@ public class CmsWarehouseCapacityController extends BaseController {
 			@RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
 			@RequestParam(required = false, value = "sort") String sort,
 			@RequestParam(required = false, value = "order") String order) {
+
 		CmsWarehouseCapacityExample cmsWarehouseCapacityExample = new CmsWarehouseCapacityExample();
-		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-			cmsWarehouseCapacityExample.setOrderByClause(sort + " " + order);
-		}
-		List<CmsWarehouseCapacity> rows = cmsWarehouseCapacityService.selectByExampleForOffsetPage(cmsWarehouseCapacityExample, offset, limit);
-		long total = cmsWarehouseCapacityService.countByExample(cmsWarehouseCapacityExample);
+
+		//暂时忽略排序功能
+		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+		//	cmsWarehouseCapacityExample.setOrderByClause(sort + " " + order);
+		//}
+
+		List<CmsWarehouseCapacity> warehouseCapacityList = cmsWarehouseCapacityService.selectByExampleForOffsetPage(cmsWarehouseCapacityExample, offset, limit);
+
+		List<JSONObject> resultList = Lists.newArrayList();
+		for (CmsWarehouseCapacity warehouseCapacity: warehouseCapacityList) {
+		    JSONObject jsonObject = new JSONObject();
+
+            CmsGoods goods = cmsGoodsService.selectByPrimaryKey(warehouseCapacity.getGoodsId());
+		    CmsWarehouse warehosue = cmsWarehouseService.selectByPrimaryKey(warehouseCapacity.getWarehouseCapacityId());
+
+            jsonObject.put("warehouseCapacityId", warehouseCapacity.getWarehouseCapacityId());
+            jsonObject.put("warehouseCapacityUseArea", warehouseCapacity.getUseArea());
+		    jsonObject.put("goodsId", goods.getGoodsId());
+		    jsonObject.put("goodsName", goods.getName());
+		    jsonObject.put("goodsType", goods.getType());
+		    jsonObject.put("goodsCount", goods.getCount());
+		    jsonObject.put("warehouseId", warehosue.getWarehouseId());
+		    jsonObject.put("warehouseAddress", warehosue.getAddress());
+
+		    resultList.add(jsonObject);
+        }
+
+        long total = cmsWarehouseCapacityService.countByExample(cmsWarehouseCapacityExample);
+
 		Map<String, Object> result = new HashMap<>(2);
-		result.put("rows", rows);
-		result.put("total", total);
+            result.put("rows", resultList);
+            result.put("total", total);
 		return result;
 	}
 }

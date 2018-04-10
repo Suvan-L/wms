@@ -24,11 +24,17 @@ public class WmsAdminUtil implements InitializingBean, ServletContextAware {
     public void setServletContext(ServletContext servletContext) {
         LOGGER.info("===== 开始解压wms-admin =====");
         String version = PropertiesFileUtil.getInstance("wms-admin-client").get("zheng.admin.version");
+        version = "1.0.0";
         LOGGER.info("wms-admin.jar 版本: {}", version);
+
         String jarPath = servletContext.getRealPath("/WEB-INF/lib/wms-admin-" + version + ".jar");
+        jarPath  = "D:\\java\\Maven\\repository\\org\\suvan\\wms-admin\\1.0.0\\web-admin-" + version + ".jar";
         LOGGER.info("wms-admin.jar 包路径: {}", jarPath);
+
         String resources = servletContext.getRealPath("/") + "/resources/wms-admin";
         LOGGER.info("wms-admin.jar 解压到: {}", resources);
+
+
         JarUtil.decompress(jarPath, resources);
         LOGGER.info("===== 解压wms-admin完成 =====");
     }

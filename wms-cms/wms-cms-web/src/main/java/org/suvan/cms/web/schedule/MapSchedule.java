@@ -9,7 +9,6 @@ import java.util.*;
 
 /**
  * 测试任务
- * Created by zhangshuzheng on 2016/11/14.
  */
 public class MapSchedule implements IScheduleTaskDealSingle<Map> {
 

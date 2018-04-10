@@ -18,9 +18,9 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="cms:article:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 添加客户</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑客户</a></shiro:hasPermission>
-		<shiro:hasPermission name="cms:article:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 修改客户</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:customer:create"><a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增客户</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:customer:update"><a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑客户</a></shiro:hasPermission>
+		<shiro:hasPermission name="cms:customer:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除客户</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>
@@ -30,7 +30,7 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/manage/supplier/list',
+		url: '${basePath}/manage/customer/list',
 		height: getHeight(),
 		striped: true,
 		search: true,
@@ -112,7 +112,7 @@ function updateAction() {
 			animationSpeed: 300,
 			title: '编辑客户',
 			columnClass: 'xlarge',
-			content: 'url:${basePath}/manage/supplier/update/' + rows[0].articleId,
+			content: 'url:${basePath}/manage/customer/update/' + rows[0].customerId,
 			onContentReady: function () {
 				initMaterialInput();
 				$('select').select2();
@@ -148,13 +148,14 @@ function deleteAction() {
 					text: '确认',
 					btnClass: 'waves-effect waves-button',
 					action: function () {
+					    //获取即将删除的 id
 						var ids = new Array();
 						for (var i in rows) {
-							ids.push(rows[i].articleId);
+							ids.push(rows[i].customerId);
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/manage/supplier/delete/' + ids.join("-"),
+							url: '${basePath}/manage/customer/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {

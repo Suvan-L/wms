@@ -88,9 +88,9 @@
 						<li class="hidden-xs">
 							<a class="waves-effect" data-ma-action="fullscreen" href="javascript:fullPage();"><i class="zmdi zmdi-fullscreen"></i> 全屏模式</a>
 						</li>
-						<%--<li>--%>
-							<%--<a class="waves-effect" data-ma-action="clear-localstorage" href="javascript:;"><i class="zmdi zmdi-delete"></i> 清除缓存</a>--%>
-						<%--</li>--%>
+						<li>
+							<a class="waves-effect" data-ma-action="clear-localstorage" href="javascript:;"><i class="zmdi zmdi-delete"></i> 清除缓存</a>
+						</li>
 						<%--<li>--%>
 							<%--<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>--%>
 						<%--</li>--%>
@@ -177,7 +177,8 @@
 			<ul id="tabs" class="tabs">
 				<li id="tab_home" data-index="home" data-closeable="false" class="cur">
 					<a class="waves-effect waves-light" href="javascript:;">首页</a>
-				</li> </ul>
+				</li>
+            </ul>
 		</div>
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">

@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 仓库库存管理服务启动类
+ *
  * @since suvan modified 2018.04.01
  */
 public class WmsCmsRpcServiceApplication {

@@ -8,6 +8,15 @@
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <div id="updateDialog" class="crudDialog">
 	<form id="updateForm" method="post">
+        <div class="form-group">
+			<label for="name">货物名称</label>
+			<input id="name" type="text" class="form-control" name="name" maxlength="30" value="${goods.name}">
+		</div>
+        <div class="form-group">
+			<label for="type">货物类型</label>
+			<input id="type" type="text" class="form-control" name="type" maxlength="20" value="${goods.type}">
+		</div>
+
 		<div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="updateSubmit();">保存</a>
 			<a class="waves-effect waves-button" href="javascript:;" onclick="updateDialog.close();">取消</a>
@@ -18,7 +27,7 @@
 function updateSubmit() {
     $.ajax({
         type: 'post',
-        url: '${basePath}/manage/goods/update/${article.articleId}',
+        url: '${basePath}/manage/goods/update/${goods.goodsId}',
         data: $('#updateForm').serialize(),
         beforeSend: function() {
 			if ($('#title').val() == '') {
