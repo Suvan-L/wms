@@ -271,7 +271,9 @@ INSERT INTO `upms_user_organization` VALUES ('7', '3', '5');
 
 -- 用户 - 权限
 INSERT INTO `upms_user_permission` VALUES ('1', '1', '1', '1');
-INSERT INTO `upms_user_permission` VALUES ('2', '1', '1', '-1');
+INSERT INTO `upms_user_permission` VALUES ('2', '1', '3', '1');
+INSERT INTO `upms_user_permission` VALUES ('3', '1', '5', '1');
+INSERT INTO `upms_user_permission` VALUES ('3', '1', '6', '1');
 
 -- 用户 - 角色
 INSERT INTO `upms_user_role` VALUES ('1', '1', '1');
