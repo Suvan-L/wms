@@ -23,9 +23,9 @@
 		/** skins **/
 		/** 动态指定系统的顶部 CSS 皮肤样式 **/
 		<c:forEach var="upmsSystem" items="${upmsSystems}">
-		#${upmsSystem.name} #header {background: ${upmsSystem.theme};}
-		#${upmsSystem.name} .content_tab{background: ${upmsSystem.theme};}
-		#${upmsSystem.name} .s-profile>a{background: url(${basePath}${upmsSystem.banner}) left top no-repeat;}
+            #${upmsSystem.name} #header {background: ${upmsSystem.theme};}
+            #${upmsSystem.name} .content_tab{background: ${upmsSystem.theme};}
+            #${upmsSystem.name} .s-profile>a{background: url(${basePath}${upmsSystem.banner}) left top no-repeat;}
 		</c:forEach>
 	</style>
 </head>
@@ -190,16 +190,6 @@
 				<p><b>单点登录(SSO)</b>：提供统一用户单点登录认证、用户鉴权功能。</p>
 				<p><b>用户会话管理</b>：提供分布式用户会话管理</p>
 				<p><b>操作日志管理</b>：提供记录用户登录、操作等日志</p><br/>
-				<p><h4>二. 对外接口概述：</h4></p>
-				<p>
-					<ul>
-						<li><b>系统组织数据接口</b></li>
-                        <li><b>用户角色数据接口</b></li>
-                        <li><b>资源权限数据接口</b></li>
-                        <li><b>用户鉴权接口</b></li>
-						<li><b>单点登录(SSO)接口</b></li>
-					</ul>
-				</p>
 			</div>
 		</div>
 	</section>

@@ -26,7 +26,7 @@
     <div class="input-group m-b-20">
         <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
         <div class="fg-line">
-            <input id="username" type="text" class="form-control" name="username" placeholder="帐号" required autofocus value="admin">
+            <input id="username" type="text" class="form-control" name="username" placeholder="帐号" required autofocus value="boss">
         </div>
     </div>
     <div class="input-group m-b-20">

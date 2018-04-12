@@ -109,6 +109,7 @@ function forceoutAction() {
 							url: '${basePath}/manage/session/forceout/' + ids.join(","),
 							success: function(result) {
 								if (result.code != 1) {
+								    //强制退出失败情况
 									if (result.data instanceof Array) {
 										$.each(result.data, function(index, value) {
 											$.confirm({
@@ -144,7 +145,10 @@ function forceoutAction() {
 									forceoutDialog.close();
 									$table.bootstrapTable('refresh');
 								}
-							},
+
+//								//重定向
+//                                top.location.href = "http://upms.wms.cn:1111/sso/login";
+                            },
 							error: function(XMLHttpRequest, textStatus, errorThrown) {
 								$.confirm({
 									theme: 'dark',
