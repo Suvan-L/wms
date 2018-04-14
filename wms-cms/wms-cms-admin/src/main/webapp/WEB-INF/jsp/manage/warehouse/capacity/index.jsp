@@ -56,6 +56,7 @@ $(function() {
 			{field: 'warehouseCapacityUseArea', title: '货物总占地面积'},
             {field: 'warehouseId', title: '仓库编号', align: 'center'},
             {field: 'warehouseAddress', title: '仓库地址'},
+            {field: 'warehouseStatus', title: '仓库状态(已用百分比)'}
 		]
 	});
 });

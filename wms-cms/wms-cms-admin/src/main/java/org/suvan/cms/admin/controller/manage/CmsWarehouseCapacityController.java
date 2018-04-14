@@ -91,6 +91,7 @@ public class CmsWarehouseCapacityController extends BaseController {
 		    jsonObject.put("goodsCount", goods.getCount());
 		    jsonObject.put("warehouseId", warehosue.getWarehouseId());
 		    jsonObject.put("warehouseAddress", warehosue.getAddress());
+		    jsonObject.put("warehouseStatus", warehosue.getStatus());
 
 		    resultList.add(jsonObject);
         }
