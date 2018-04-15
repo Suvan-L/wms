@@ -183,9 +183,6 @@
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">
                 <h3>一. 系统简介</h3>
-                <p><b>如今世界步入大互联网时代，一个好的仓库管理系统是企业供应链的重要保障</b></p>
-                <p><b>本仓库管理系统，采用智能化的手段保证进货和库存控制及发货等核心物流流程，将直接对企业的核心竞争力造成非常巨大的影响。</b></p>
-                <p><b>本仓库管理系统:</b></p>
                 <ul>
                     <li>主要是基于 Java Web 的 SSM （Spring & Spring MVC & MyBatis）框架体系的后端系统架构，</li>
                     <li>前端主要使用 jQuery & Bootstrap 实现交互界面，并采用 JSP 模板引擎进行交互渲染，</li>
