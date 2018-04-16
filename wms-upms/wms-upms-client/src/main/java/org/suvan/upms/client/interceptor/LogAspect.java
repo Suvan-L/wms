@@ -53,6 +53,13 @@ public class LogAspect {
 		LOGGER.debug("doAfterInServiceLayer");
 	}
 
+    /**
+     * 日志切面环绕函数
+     *
+     * @param pjp
+     * @return
+     * @throws Throwable
+     */
 	@Around("execution(* *..controller..*.*(..))")
 	public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
 		// 获取request
@@ -61,11 +68,13 @@ public class LogAspect {
 		HttpServletRequest request = servletRequestAttributes.getRequest();
 
 		UpmsLog upmsLog = new UpmsLog();
+
 		// 从注解中获取操作名称、获取响应结果
 		Object result = pjp.proceed();
 		Signature signature = pjp.getSignature();
 		MethodSignature methodSignature = (MethodSignature) signature;
 		Method method = methodSignature.getMethod();
+
 		if (method.isAnnotationPresent(ApiOperation.class)) {
 			ApiOperation log = method.getAnnotation(ApiOperation.class);
 			upmsLog.setDescription(log.value());
@@ -83,7 +92,8 @@ public class LogAspect {
 		upmsLog.setBasePath(RequestUtil.getBasePath(request));
 		upmsLog.setIp(RequestUtil.getIpAddr(request));
 		upmsLog.setMethod(request.getMethod());
-		if ("GET".equalsIgnoreCase(request.getMethod())) {
+
+        if ("GET".equalsIgnoreCase(request.getMethod())) {
 			upmsLog.setParameter(request.getQueryString());
 		} else {
 			upmsLog.setParameter(ObjectUtils.toString(request.getParameterMap()));
