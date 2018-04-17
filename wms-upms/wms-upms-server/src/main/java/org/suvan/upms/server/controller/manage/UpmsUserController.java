@@ -6,6 +6,7 @@ import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import org.suvan.common.base.BaseController;
 import org.suvan.common.util.MD5Util;
+import org.suvan.common.util.StringUtil;
 import org.suvan.common.validator.LengthValidator;
 import org.suvan.common.validator.NotNullValidator;
 import org.suvan.upms.common.constant.UpmsResult;
@@ -148,7 +149,7 @@ public class UpmsUserController extends BaseController {
             @RequestParam(required = false, value = "order") String order) {
         UpmsUserExample upmsUserExample = new UpmsUserExample();
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            upmsUserExample.setOrderByClause(sort + " " + order);
+            upmsUserExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
         }
         if (StringUtils.isNotBlank(search)) {
             upmsUserExample.or()

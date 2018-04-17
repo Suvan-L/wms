@@ -3,17 +3,6 @@ package org.suvan.upms.server.controller.manage;
 import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
-import org.suvan.common.base.BaseController;
-import org.suvan.common.validator.LengthValidator;
-import org.suvan.upms.common.constant.UpmsResult;
-import org.suvan.upms.common.constant.UpmsResultConstant;
-import org.suvan.upms.dao.model.UpmsPermission;
-import org.suvan.upms.dao.model.UpmsPermissionExample;
-import org.suvan.upms.dao.model.UpmsSystem;
-import org.suvan.upms.dao.model.UpmsSystemExample;
-import org.suvan.upms.rpc.api.UpmsApiService;
-import org.suvan.upms.rpc.api.UpmsPermissionService;
-import org.suvan.upms.rpc.api.UpmsSystemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
@@ -24,7 +13,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
+import org.suvan.common.validator.LengthValidator;
+import org.suvan.upms.common.constant.UpmsResult;
+import org.suvan.upms.common.constant.UpmsResultConstant;
+import org.suvan.upms.dao.model.UpmsPermission;
+import org.suvan.upms.dao.model.UpmsPermissionExample;
+import org.suvan.upms.dao.model.UpmsSystem;
+import org.suvan.upms.dao.model.UpmsSystemExample;
+import org.suvan.upms.rpc.api.UpmsApiService;
+import org.suvan.upms.rpc.api.UpmsPermissionService;
+import org.suvan.upms.rpc.api.UpmsSystemService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -79,7 +84,8 @@ public class UpmsPermissionController extends BaseController {
             criteria.andSystemIdEqualTo(systemId);
         }
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-            upmsPermissionExample.setOrderByClause(sort + " " + order);
+            //驼峰转下换线例如: permissionId -> permission_id
+            upmsPermissionExample.setOrderByClause(StringUtil.humpToLine(sort)  + " " + order);
         }
         if (StringUtils.isNotBlank(search)) {
             upmsPermissionExample.or()
