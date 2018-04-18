@@ -52,11 +52,11 @@ $(function() {
 			{field: 'ck', checkbox: true},
 			{field: 'logId', title: '编号', sortable: true, align: 'center'},
 			{field: 'description', title: '操作'},
-            {field: 'username', title: '操作用户'},
-			{field: 'startTime', title: '操作时间'},
-			{field: 'spendTime', title: '耗时'},
+            {field: 'username', title: '操作用户', sortable: true},
+			{field: 'startTime', title: '操作时间', formatter: 'timeFormatter', sortable: true},
+			{field: 'spendTime', title: '耗时', sortable: true},
 			{field: 'url', title: '请求路径'},
-			{field: 'method', title: '请求类型'},
+			{field: 'method', title: '请求类型', sortable: true},
 			{field: 'parameter', title: '请求参数'},
 			{field: 'userAgent', title: '用户标识'},
 			{field: 'ip', title: 'IP地址'},
@@ -64,6 +64,12 @@ $(function() {
 		]
 	});
 });
+
+// 格式化时间
+function timeFormatter(value , row, index) {
+    return new Date(value).toLocaleString();
+}
+
 // 删除
 var deleteDialog;
 function deleteAction() {

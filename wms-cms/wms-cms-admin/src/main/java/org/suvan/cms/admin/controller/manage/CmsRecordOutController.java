@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ import org.suvan.cms.rpc.api.CmsRecordOutService;
 import org.suvan.cms.rpc.api.CmsWarehouseCapacityService;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -80,10 +82,9 @@ public class CmsRecordOutController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsRecordOutExample cmsRecordOutExample = new CmsRecordOutExample();
 
-		//暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsRecordOutExample.setOrderByClause(sort + " " + order);
-		//}
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+			cmsRecordOutExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+		}
 
 		List<CmsRecordOut> recordOutList = cmsRecordOutService.selectByExampleForOffsetPage(cmsRecordOutExample, offset, limit);
 
@@ -97,8 +98,8 @@ public class CmsRecordOutController extends BaseController {
 
             //提取部分属性
             jsonObject.put("recordOutId", recordOut.getRecordOutId());
-            jsonObject.put("recordOutAmount", recordOut.getAmount());
-            jsonObject.put("recordOutCtime", recordOut.getCtime());
+            jsonObject.put("amount", recordOut.getAmount());
+            jsonObject.put("ctime", recordOut.getCtime());
             jsonObject.put("customerId", customer.getCustomerId());
             jsonObject.put("customerCompany", customer.getCompany());
             jsonObject.put("goodsId", goods.getGoodsId());

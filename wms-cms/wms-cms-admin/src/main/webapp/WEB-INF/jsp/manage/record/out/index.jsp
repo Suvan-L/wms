@@ -45,22 +45,22 @@ $(function() {
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
-		idField: 'articleId',
-		sortName: 'orders',
-        sortOrder: 'desc',
+		idField: 'recordOutId',
+		sortName: 'recordOutId',
+        sortOrder: 'asc',
 		maintainSelected: true,
 		toolbar: '#toolbar',
 		columns: [
             {field: 'ck', checkbox: true},
             {field: 'recordOutId', title: '编号', sortable: true, align: 'center'},
-            {field: 'goodsId', title: '货物编号', align: 'center'},
+            {field: 'goodsId', title: '货物编号', align: 'center', sortable: true},
             {field: 'goodsName', title: '商品名称'},
-            {field: 'recordOutAmount', title: '出库数量'},
-            {field: 'customerId', title: '客户编号', align: 'center'},
+            {field: 'amount', title: '出库数量', sortable: true},
+            {field: 'customerId', title: '客户编号', align: 'center', sortable: true},
             {field: 'customerCompany', title: '客户公司名称'},
-            {field: 'warehouseId', title: '仓库编号', align: 'center'},
+            {field: 'warehouseId', title: '仓库编号', align: 'center', sortable: true},
             {field: 'warehouseAddress', title: '仓库地址'},
-            {field: 'recordOutCtime', title: '出库时间', formatter: 'timeFormatter'}
+            {field: 'ctime', title: '出库时间', formatter: 'timeFormatter', sortable: true}
 		]
 	});
 });

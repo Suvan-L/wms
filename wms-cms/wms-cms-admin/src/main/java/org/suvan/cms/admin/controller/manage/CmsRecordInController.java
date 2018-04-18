@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ import org.suvan.cms.rpc.api.CmsSupplierService;
 import org.suvan.cms.rpc.api.CmsWarehouseCapacityService;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
-import org.suvan.upms.dao.model.UpmsPermission;
+import org.suvan.common.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -81,11 +82,10 @@ public class CmsRecordInController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsRecordInExample cmsRecordInExample = new CmsRecordInExample();
 
-		//暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsRecordInExample.setOrderByClause(sort + " " + order);
-		//}
-
+		//排序功能
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+			cmsRecordInExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+		}
 
         List<CmsRecordIn> recordInList = cmsRecordInService.selectByExampleForOffsetPage(cmsRecordInExample, offset, limit);
 
@@ -99,8 +99,8 @@ public class CmsRecordInController extends BaseController {
 
             //提取部分属性
             jsonObject.put("recordInId", recordIn.getRecordInId());
-            jsonObject.put("recordInAmount", recordIn.getAmount());
-            jsonObject.put("recordInCtime", recordIn.getCtime());
+            jsonObject.put("amount", recordIn.getAmount());
+            jsonObject.put("ctime", recordIn.getCtime());
             jsonObject.put("supplierId", supplier.getSupplierId());
             jsonObject.put("supplierCompany", supplier.getCompany());
             jsonObject.put("goodsId", goods.getGoodsId());

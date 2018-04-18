@@ -23,6 +23,7 @@ import org.suvan.cms.dao.model.CmsSupplier;
 import org.suvan.cms.dao.model.CmsSupplierExample;
 import org.suvan.cms.rpc.api.CmsSupplierService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 import org.suvan.common.validator.LengthValidator;
 
 import java.util.HashMap;
@@ -61,10 +62,10 @@ public class CmsSupplierController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsSupplierExample cmsSupplierExamples = new CmsSupplierExample();
 
-		//暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsSupplierExamples.setOrderByClause(sort + " " + order);
-		//}
+		//排序功能
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+			cmsSupplierExamples.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+		}
 
 		List<CmsSupplier> rows = cmsSupplierService.selectByExampleForOffsetPage(cmsSupplierExamples, offset, limit);
 		long total = cmsSupplierService.countByExample(cmsSupplierExamples);
@@ -80,7 +81,6 @@ public class CmsSupplierController extends BaseController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
 		CmsSupplierExample cmsSupplierExample = new CmsSupplierExample();
-            //cmsSupplierExample.setOrderByClause("supplier_id DESC");
 
 		List<CmsSupplier> cmsTopics = cmsSupplierService.selectByExample(cmsSupplierExample);
             modelMap.put("cmsTopics", cmsTopics);

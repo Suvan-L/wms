@@ -47,19 +47,19 @@ $(function() {
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
-		idField: 'articleId',
-		sortName: 'orders',
-        sortOrder: 'desc',
+		idField: 'warehouseId',
+		sortName: 'warehouseId',
+        sortOrder: 'asc',
 		maintainSelected: true,
 		toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'warehouseId', title: '编号', sortable: true, align: 'center'},
 			{field: 'address', title: '地址'},
-            {field: 'area', title: '区域面积'},
-            {field: 'goodsArea', title: '已存放所有货品面积总和'},
-			{field: 'status', title: '仓库状态（已用百分比）'},
-			{field: 'admin', title: '现任管理员'},
+            {field: 'area', title: '区域面积', sortable: true},
+            {field: 'goodsArea', title: '已存放所有货品面积总和', sortable: true},
+			{field: 'status', title: '仓库状态（已用百分比）', sortable: true},
+			{field: 'admin', title: '现任管理员', sortable: true},
             {field: 'description', title: '描述'}
 		]
 	});

@@ -23,6 +23,7 @@ import org.suvan.cms.dao.model.CmsWarehouse;
 import org.suvan.cms.dao.model.CmsWarehouseExample;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 import org.suvan.common.validator.LengthValidator;
 import org.suvan.common.validator.NotNullValidator;
 
@@ -62,10 +63,9 @@ public class CmsWarehouseController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsWarehouseExample cmsWarehouseExample = new CmsWarehouseExample();
 
-		//暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsWarehouseExample.setOrderByClause(sort + " " + order);
-		//}
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+			cmsWarehouseExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+		}
 
 		List<CmsWarehouse> rows = cmsWarehouseService.selectByExampleForOffsetPage(cmsWarehouseExample, offset, limit);
 		long total = cmsWarehouseService.countByExample(cmsWarehouseExample);

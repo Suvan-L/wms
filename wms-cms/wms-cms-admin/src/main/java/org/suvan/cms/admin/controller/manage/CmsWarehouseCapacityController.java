@@ -1,10 +1,10 @@
 package org.suvan.cms.admin.controller.manage;
 
-import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +22,7 @@ import org.suvan.cms.rpc.api.CmsGoodsService;
 import org.suvan.cms.rpc.api.CmsWarehouseCapacityService;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -69,10 +70,10 @@ public class CmsWarehouseCapacityController extends BaseController {
 
 		CmsWarehouseCapacityExample cmsWarehouseCapacityExample = new CmsWarehouseCapacityExample();
 
-		//暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsWarehouseCapacityExample.setOrderByClause(sort + " " + order);
-		//}
+		//排序功能
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+            cmsWarehouseCapacityExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+		}
 
 		List<CmsWarehouseCapacity> warehouseCapacityList = cmsWarehouseCapacityService.selectByExampleForOffsetPage(cmsWarehouseCapacityExample, offset, limit);
 
@@ -84,14 +85,15 @@ public class CmsWarehouseCapacityController extends BaseController {
 		    CmsWarehouse warehosue = cmsWarehouseService.selectByPrimaryKey(warehouseCapacity.getWarehouseCapacityId());
 
             jsonObject.put("warehouseCapacityId", warehouseCapacity.getWarehouseCapacityId());
-            jsonObject.put("warehouseCapacityUseArea", warehouseCapacity.getUseArea());
+            jsonObject.put("useArea", warehouseCapacity.getUseArea());
 		    jsonObject.put("goodsId", goods.getGoodsId());
 		    jsonObject.put("goodsName", goods.getName());
 		    jsonObject.put("goodsType", goods.getType());
 		    jsonObject.put("goodsCount", goods.getCount());
+		    jsonObject.put("goodsUseArea", goods.getSize() * goods.getCount());
 		    jsonObject.put("warehouseId", warehosue.getWarehouseId());
 		    jsonObject.put("warehouseAddress", warehosue.getAddress());
-		    jsonObject.put("warehouseStatus", warehosue.getStatus());
+		    jsonObject.put("status", warehosue.getStatus());
 
 		    resultList.add(jsonObject);
         }

@@ -47,9 +47,9 @@ $(function() {
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
-		idField: 'articleId',
-		sortName: 'orders',
-        sortOrder: 'desc',
+		idField: 'customerId',
+		sortName: 'customerId',
+        sortOrder: 'asc',
 		maintainSelected: true,
 		toolbar: '#toolbar',
 		columns: [
@@ -60,7 +60,7 @@ $(function() {
 			{field: 'name', title: '联系人'},
 			{field: 'tel', title: '电话'},
 			{field: 'email', title: '邮箱'},
-			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter'},
+			{field: 'ctime', title: '创建时间', formatter: 'timeFormatter', sortable: true}
 		]
 	});
 });

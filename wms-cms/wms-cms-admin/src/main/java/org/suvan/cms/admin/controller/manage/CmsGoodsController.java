@@ -23,6 +23,7 @@ import org.suvan.cms.dao.model.CmsGoods;
 import org.suvan.cms.dao.model.CmsGoodsExample;
 import org.suvan.cms.rpc.api.CmsGoodsService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 import org.suvan.common.validator.LengthValidator;
 import org.suvan.common.validator.NotNullValidator;
 
@@ -62,10 +63,10 @@ public class CmsGoodsController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsGoodsExample cmsGoodsExample = new CmsGoodsExample();
 
-		////暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsGoodsExample.setOrderByClause(sort + " " + order);
-		//}
+		////排序功能
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+			cmsGoodsExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+		}
 
 		List<CmsGoods> rows = cmsGoodsService.selectByExampleForOffsetPage(cmsGoodsExample, offset, limit);
 		long total = cmsGoodsService.countByExample(cmsGoodsExample);
@@ -81,8 +82,6 @@ public class CmsGoodsController extends BaseController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
 		CmsGoodsExample cmsGoodsExample = new CmsGoodsExample();
-            cmsGoodsExample.setOrderByClause("goods_id DESC");
-
 		List<CmsGoods> cmsGoods = cmsGoodsService.selectByExample(cmsGoodsExample);
             modelMap.put("cmsGoods", cmsGoods);
 

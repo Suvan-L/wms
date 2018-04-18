@@ -23,6 +23,7 @@ import org.suvan.cms.dao.model.CmsCustomer;
 import org.suvan.cms.dao.model.CmsCustomerExample;
 import org.suvan.cms.rpc.api.CmsCustomerService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.StringUtil;
 import org.suvan.common.validator.LengthValidator;
 
 import java.util.HashMap;
@@ -60,10 +61,10 @@ public class CmsCustomerController extends BaseController {
 			@RequestParam(required = false, value = "order") String order) {
 		CmsCustomerExample cmsCustomerExample = new CmsCustomerExample();
 
-		//暂时忽略排序功能
-		//if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
-		//	cmsCustomerExample.setOrderByClause(sort + " " + order);
-		//}
+		//排序功能
+		if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
+            cmsCustomerExample.setOrderByClause(StringUtil.humpToLine(sort) + " " + order);
+        }
 
 		List<CmsCustomer> rows = cmsCustomerService.selectByExampleForOffsetPage(cmsCustomerExample, offset, limit);
 		long total = cmsCustomerService.countByExample(cmsCustomerExample);

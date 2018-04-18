@@ -42,21 +42,22 @@ $(function() {
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
-		idField: 'articleId',
-		sortName: 'orders',
-        sortOrder: 'desc',
+		idField: 'warehouseCapacityId',
+		sortName: 'warehouseCapacityId',
+        sortOrder: 'asc',
 		maintainSelected: true,
 		toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'warehouseCapacityId', title: '编号', sortable: true, align: 'center'},
-			{field: 'goodsId', title: '货物编号', align: 'center'},
+			{field: 'goodsId', title: '货物编号', sortable: true, align: 'center'},
             {field: 'goodsName', title: '货物名称'},
             {field: 'goodsCount', title: '货物总数'},
-			{field: 'warehouseCapacityUseArea', title: '货物总占地面积'},
-            {field: 'warehouseId', title: '仓库编号', align: 'center'},
+            {field: 'goodsUseArea', title: "货物总占地面积"},
+			{field: 'useArea', title: '仓库目前已使用面积', sortable: true},
+            {field: 'warehouseId', title: '仓库编号', align: 'center', sortable: true},
             {field: 'warehouseAddress', title: '仓库地址'},
-            {field: 'warehouseStatus', title: '仓库状态(已用百分比)'}
+            {field: 'status', title: '仓库状态(已用百分比)', sortable: true}
 		]
 	});
 });

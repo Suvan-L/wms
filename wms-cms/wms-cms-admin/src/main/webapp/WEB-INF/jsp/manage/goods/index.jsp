@@ -47,18 +47,18 @@ $(function() {
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
-		idField: 'articleId',
-		sortName: 'orders',
-        sortOrder: 'desc',
+		idField: 'goodsId',
+		sortName: 'goodsId',
+        sortOrder: 'asc',
 		maintainSelected: true,
 		toolbar: '#toolbar',
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'goodsId', title: '编号', sortable: true, align: 'center'},
 			{field: 'name', title: '货物名'},
-			{field: 'type', title: '货物类型'},
-            {field: 'count', title: '现有数量'},
-			{field: 'size', title: '单个货品占地面积'}
+			{field: 'type', title: '货物类型', sortable: true},
+            {field: 'count', title: '现有数量', sortable: true},
+			{field: 'size', title: '单个货品占地面积', sortable: true}
 		]
 	});
 });
