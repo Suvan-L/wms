@@ -9,6 +9,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import org.suvan.cms.rpc.api.CmsGoodsService;
 import org.suvan.cms.rpc.api.CmsWarehouseCapacityService;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
+import org.suvan.common.util.SendEmailUtil;
 import org.suvan.common.util.StringUtil;
 
 import java.util.HashMap;
@@ -38,16 +40,20 @@ public class CmsWarehouseCapacityController extends BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmsWarehouseCapacityController.class);
 
+	private final double wareHouseThreshold = 0.9;
+
 	private CmsWarehouseCapacityService cmsWarehouseCapacityService;
     private CmsGoodsService cmsGoodsService;
 	private CmsWarehouseService cmsWarehouseService;
+	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 	@Autowired
 	public CmsWarehouseCapacityController (CmsWarehouseCapacityService cmsWarehouseCapacityService, CmsGoodsService cmsGoodsService,
-                                           CmsWarehouseService cmsWarehouseService) {
+                                           CmsWarehouseService cmsWarehouseService, ThreadPoolTaskExecutor threadPoolTaskExecutor) {
 	    this.cmsWarehouseCapacityService = cmsWarehouseCapacityService;
 	    this.cmsGoodsService = cmsGoodsService;
 	    this.cmsWarehouseService = cmsWarehouseService;
+	    this.threadPoolTaskExecutor = threadPoolTaskExecutor;
     }
 
 
@@ -95,6 +101,12 @@ public class CmsWarehouseCapacityController extends BaseController {
 		    jsonObject.put("warehouseAddress", warehosue.getAddress());
 		    jsonObject.put("status", warehosue.getStatus());
 
+            //库存监控
+            //if (warehosue.getStatus() > wareHouseThreshold) {
+                //未完善，发送提醒邮件
+                //this.monitorWareHouseCapacity(warehosue);
+            //}
+
 		    resultList.add(jsonObject);
         }
 
@@ -105,4 +117,30 @@ public class CmsWarehouseCapacityController extends BaseController {
             result.put("total", total);
 		return result;
 	}
+
+	/*
+	 * ***********************************************
+	 * private method
+	 * ***********************************************
+	 */
+
+    /**
+     * 监控容量
+     *
+     * @param warehouse 仓库
+     */
+    private void monitorWareHouseCapacity(CmsWarehouse warehouse) {
+        //TODO 未完善
+	    final String emailContent = "编号： " +  warehouse.getWarehouseId()
+                + " 的仓库，容量超过预设阀值（" + wareHouseThreshold * 100 + "% ） 为 " +
+                + warehouse.getStatus() + "，请管理员尽快处理!";
+
+        //监控库存
+        threadPoolTaskExecutor.execute(new Runnable() {
+            @Override
+            public void run () {
+                SendEmailUtil.send("wms 管理员", "liushuwei0925@gmail.com", "wms 仓库容量阀值监控", emailContent);
+            }
+        });
+    }
 }

@@ -148,7 +148,7 @@
 					<ul>
 						<c:forEach var="subUpmsPermission" items="${upmsPermissions}">
 							<c:if test="${subUpmsPermission.pid == upmsPermission.permissionId}">
-								<c:forEach var="upmsSystem" items="${upmsSystems}">
+								<c:forEach var="upmsSystem" items="1${upmsSystems}">
 									<c:if test="${subUpmsPermission.systemId == upmsSystem.systemId}">
 									<c:set var="systemBasePath" value="${upmsSystem.basepath}"/></c:if>
 								</c:forEach>

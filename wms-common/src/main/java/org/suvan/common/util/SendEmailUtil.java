@@ -18,9 +18,7 @@ import java.util.Properties;
  *
  * @author Suvan
  */
-public final class SendEmailUtil {
-
-    private SendEmailUtil() { }
+public class SendEmailUtil {
 
     /**
      * 腾讯企业邮箱

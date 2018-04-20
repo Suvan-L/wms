@@ -57,7 +57,7 @@ $(function() {
 			{field: 'useArea', title: '仓库目前已使用面积', sortable: true},
             {field: 'warehouseId', title: '仓库编号', align: 'center', sortable: true},
             {field: 'warehouseAddress', title: '仓库地址'},
-            {field: 'status', title: '仓库状态(已用百分比)', sortable: true}
+            {field: 'status', title: '仓库状态(已用百分比)'}
 		]
 	});
 });

@@ -273,7 +273,7 @@ INSERT INTO `upms_user_organization` VALUES ('7', '3', '5');
 INSERT INTO `upms_user_permission` VALUES ('1', '1', '1', '1');
 INSERT INTO `upms_user_permission` VALUES ('2', '1', '3', '1');
 INSERT INTO `upms_user_permission` VALUES ('3', '1', '5', '1');
-INSERT INTO `upms_user_permission` VALUES ('3', '1', '6', '1');
+INSERT INTO `upms_user_permission` VALUES ('4', '1', '6', '1');
 
 -- 用户 - 角色
 INSERT INTO `upms_user_role` VALUES ('1', '1', '1');
@@ -302,25 +302,26 @@ INSERT INTO `cms_customer` VALUES (2, '深圳市松林达电子有限公司', '�
 INSERT INTO `cms_customer` VALUES (3, '郑州绿之源饮品有限公司 ', '赵志敬', '87094196', '87092165@qq.com', '中国 河南 郑州市 郑州市嘉亿东方大厦609', '3');
 
 -- 货物
-INSERT INTO `cms_goods` VALUES (1, '五孔插座西门子墙壁开关', '电器', 32, 132);
-INSERT INTO `cms_goods` VALUES (2, '陶瓷马克杯', '陶瓷', 880, 93);
-INSERT INTO `cms_goods` VALUES (3, '精酿苹果醋', '饮料',  312, 64);
+INSERT INTO `cms_goods` VALUES (1, '五孔插座西门子墙壁开关', '电器', 4, 12384);
+INSERT INTO `cms_goods` VALUES (2, '陶瓷马克杯', '陶瓷', 12, 6630);
+INSERT INTO `cms_goods` VALUES (3, '精酿苹果醋', '饮料', 10, 2000);
 
 -- 仓库
-INSERT INTO `cms_warehouse` VALUES (1, '北京顺义南彩工业园区彩祥西路9号', 1111000, 86064, 7.75, '刘淑玮', '饮料类产品储存库');
-INSERT INTO `cms_warehouse` VALUES (2, '广州白云石井石潭路大基围工业区', 6000000, 19968, 0.32, '刘淑玮', '电器类产品储存库');
-INSERT INTO `cms_warehouse` VALUES (3, '香港北区文锦渡路（红桥新村）', 322000, 0, 0, '刘淑玮', '生活类用品储存库');
+INSERT INTO `cms_warehouse` VALUES (1, '北京顺义南彩工业园区彩祥西路9号', 111000, 49536, 0.45, '刘淑玮', '饮料类产品储存库');
+INSERT INTO `cms_warehouse` VALUES (2, '广州白云石井石潭路大基围工业区', 6000000, 79560, 0.13, '刘淑玮', '电器类产品储存库');
+INSERT INTO `cms_warehouse` VALUES (3, '香港北区文锦渡路（红桥新村）', 322000, 20000, 0.62, '刘淑玮', '生活类用品储存库');
 
 -- 仓库容量
 INSERT INTO `cms_warehouse_capacity` VALUES (1, 1, 1, 4224);
-INSERT INTO `cms_warehouse_capacity` VALUES (2, 2, 1, 81840);
-INSERT INTO `cms_warehouse_capacity` VALUES (3, 3, 2, 19968);
+INSERT INTO `cms_warehouse_capacity` VALUES (2, 2, 2, 81840);
+INSERT INTO `cms_warehouse_capacity` VALUES (3, 3, 3, 19968);
 
 -- 入库记录
-INSERT INTO `cms_record_in` VALUES (1, 1, 1, 1, 20, '1487471013117');
-INSERT INTO `cms_record_in` VALUES (2, 1, 1, 1, 430, '1487471015117');
-INSERT INTO `cms_record_in` VALUES (3, 1, 1, 1, 600, '1487471023117');
+INSERT INTO `cms_record_in` VALUES (1, 1, 1, 1, 13000, '1487471026117');
+INSERT INTO `cms_record_in` VALUES (2, 2, 2, 2, 1000, '1487471027117');
+INSERT INTO `cms_record_in` VALUES (3, 3, 3, 3, 2000, '1487471028117');
+
 
 -- 出库记录
-INSERT INTO `cms_record_out` VALUES (1, 1, 1, 1, 1000, '1487471026117');
-INSERT INTO `cms_record_out` VALUES (2, 1, 1, 1, 50, '1487471926117');
+INSERT INTO `cms_record_out` VALUES (1, 1, 1, 1, 616, '1487471036117');
+INSERT INTO `cms_record_out` VALUES (2, 2, 2, 2, 337, '1487471937117');
