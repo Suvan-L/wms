@@ -24,7 +24,6 @@ import org.suvan.cms.dao.model.CmsWarehouseExample;
 import org.suvan.cms.rpc.api.CmsWarehouseService;
 import org.suvan.common.base.BaseController;
 import org.suvan.common.util.StringUtil;
-import org.suvan.common.validator.LengthValidator;
 import org.suvan.common.validator.NotNullValidator;
 
 import java.util.HashMap;

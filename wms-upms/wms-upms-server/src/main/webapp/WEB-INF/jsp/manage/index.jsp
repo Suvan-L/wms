@@ -148,7 +148,7 @@
 					<ul>
 						<c:forEach var="subUpmsPermission" items="${upmsPermissions}">
 							<c:if test="${subUpmsPermission.pid == upmsPermission.permissionId}">
-								<c:forEach var="upmsSystem" items="1${upmsSystems}">
+								<c:forEach var="upmsSystem" items="${upmsSystems}">
 									<c:if test="${subUpmsPermission.systemId == upmsSystem.systemId}">
 									<c:set var="systemBasePath" value="${upmsSystem.basepath}"/></c:if>
 								</c:forEach>
@@ -202,7 +202,7 @@
 
                 <br>
 
-                <h3>三. 库存管理模块 - 功能概述：</h3>
+                <h3>三. 库存管理模块 - 功能概述</h3>
                 <p><b>入库记录</b>： 添加货品入库物流记录，可视化操作，实时更新(增加)相应仓库货品库存 </p>
                 <p><b>出库记录</b>： 添加货品出库物流记录，可视化操作，实时更新(减少)相应仓库货品库存</p>
                 <p><b>供应商管理</b>： 对提供货品的供应商信息进行系统化管理</p>
