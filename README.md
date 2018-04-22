@@ -4,7 +4,7 @@
 
 
 ## 项目设计
-- ![]
+- ![后台管理界面](./wms-resources/page/backstage.png)
 - ![活动图](./wms-resources/design-image/activity-flow.png)
 - ![数据表](./wms-resources/design-image/database-table.png)
 
@@ -18,5 +18,5 @@
   - 库存问题
   - 非法操作
   - 流量限制
-- [ ] 加入缓存控制
+- [ ] 中间层缓存优化
 - [ ] 自动化测试
