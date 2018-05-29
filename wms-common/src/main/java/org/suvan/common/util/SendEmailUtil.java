@@ -1,7 +1,5 @@
 package org.suvan.common.util;
 
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -11,6 +9,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
+
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
  * 发送邮件工具类

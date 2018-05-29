@@ -1,5 +1,9 @@
 package org.suvan.cms.admin.controller.manage;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,7 +13,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,10 +29,6 @@ import org.suvan.common.base.BaseController;
 import org.suvan.common.util.SendEmailUtil;
 import org.suvan.common.util.StringUtil;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * 仓库库存控制器
  */
@@ -45,15 +44,13 @@ public class CmsWarehouseCapacityController extends BaseController {
 	private CmsWarehouseCapacityService cmsWarehouseCapacityService;
     private CmsGoodsService cmsGoodsService;
 	private CmsWarehouseService cmsWarehouseService;
-	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 	@Autowired
 	public CmsWarehouseCapacityController (CmsWarehouseCapacityService cmsWarehouseCapacityService, CmsGoodsService cmsGoodsService,
-                                           CmsWarehouseService cmsWarehouseService, ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+                                           CmsWarehouseService cmsWarehouseService) {
 	    this.cmsWarehouseCapacityService = cmsWarehouseCapacityService;
 	    this.cmsGoodsService = cmsGoodsService;
 	    this.cmsWarehouseService = cmsWarehouseService;
-	    this.threadPoolTaskExecutor = threadPoolTaskExecutor;
     }
 
 
@@ -73,6 +70,7 @@ public class CmsWarehouseCapacityController extends BaseController {
 			@RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
 			@RequestParam(required = false, value = "sort") String sort,
 			@RequestParam(required = false, value = "order") String order) {
+
 
 		CmsWarehouseCapacityExample cmsWarehouseCapacityExample = new CmsWarehouseCapacityExample();
 
@@ -100,6 +98,9 @@ public class CmsWarehouseCapacityController extends BaseController {
 		    jsonObject.put("warehouseId", warehosue.getWarehouseId());
 		    jsonObject.put("warehouseAddress", warehosue.getAddress());
 		    jsonObject.put("status", warehosue.getStatus());
+
+
+            this.monitorWareHouseCapacity(warehosue);
 
             //库存监控
             //if (warehosue.getStatus() > wareHouseThreshold) {
@@ -131,16 +132,11 @@ public class CmsWarehouseCapacityController extends BaseController {
      */
     private void monitorWareHouseCapacity(CmsWarehouse warehouse) {
         //TODO 未完善
-	    final String emailContent = "编号： " +  warehouse.getWarehouseId()
+        final String emailContent = "编号： " + warehouse.getWarehouseId()
                 + " 的仓库，容量超过预设阀值（" + wareHouseThreshold * 100 + "% ） 为 " +
-                + warehouse.getStatus() + "，请管理员尽快处理!";
+                +warehouse.getStatus() + "，请管理员尽快处理!";
 
         //监控库存
-        threadPoolTaskExecutor.execute(new Runnable() {
-            @Override
-            public void run () {
-                SendEmailUtil.send("wms 管理员", "liushuwei0925@gmail.com", "wms 仓库容量阀值监控", emailContent);
-            }
-        });
+        SendEmailUtil.send("wms 管理员", "liushuwei0925@gmail.com", "wms 仓库容量阀值监控", emailContent);
     }
 }
