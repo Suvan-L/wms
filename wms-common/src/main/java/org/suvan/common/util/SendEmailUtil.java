@@ -9,6 +9,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
@@ -38,6 +40,25 @@ public class SendEmailUtil {
     private static final String FROM_SUBJECT_ENCODING = "UTF-8";
     private static final String FROM_CONTENT_TYPE = "text/html;charset=UTF-8";
 
+    private static ExecutorService executorService = Executors.newCachedThreadPool();
+
+    /**
+     * 异步发送邮件
+     *
+     * @param sendNickName 发件人昵称
+     * @param receiveEmail 接收邮箱
+     * @param sendSubject 发送主题
+     * @param sendEmailContent 邮件内容
+     */
+    public static void asyncSend (final String sendNickName, final String receiveEmail, final String sendSubject, final String sendEmailContent) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run () {
+                send(sendNickName, receiveEmail, sendSubject, sendEmailContent);
+            }
+        });
+    }
+
     /**
      * 发送（邮件）
      *      - 构建邮件请求
@@ -55,7 +76,7 @@ public class SendEmailUtil {
      * @param sendSubject 发送主题
      * @param sendEmailContent 发送内容
      */
-   public static void send(String sendNickname, String receiveEmail,
+    public static void send(String sendNickname, String receiveEmail,
                             String sendSubject, String sendEmailContent) {
         JavaMailSenderImpl sender = new JavaMailSenderImpl();
             sender.setUsername(FROM_USERNAME);
