@@ -99,14 +99,10 @@ public class CmsWarehouseCapacityController extends BaseController {
 		    jsonObject.put("warehouseAddress", warehosue.getAddress());
 		    jsonObject.put("status", warehosue.getStatus());
 
-
-            this.monitorWareHouseCapacity(warehosue);
-
-            //库存监控
-            //if (warehosue.getStatus() > wareHouseThreshold) {
-                //未完善，发送提醒邮件
-                //this.monitorWareHouseCapacity(warehosue);
-            //}
+            if (warehosue.getStatus() > wareHouseThreshold) {
+                //当超过阀值，进行库存监控
+                this.monitorWareHouseCapacity(warehosue);
+            }
 
 		    resultList.add(jsonObject);
         }
@@ -127,16 +123,16 @@ public class CmsWarehouseCapacityController extends BaseController {
 
     /**
      * 监控容量
+     *      - 达到预折阀值，异步发送邮件实施监控
      *
      * @param warehouse 仓库
      */
     private void monitorWareHouseCapacity(CmsWarehouse warehouse) {
-        //TODO 未完善
         final String emailContent = "编号： " + warehouse.getWarehouseId()
                 + " 的仓库，容量超过预设阀值（" + wareHouseThreshold * 100 + "% ） 为 " +
                 +warehouse.getStatus() + "，请管理员尽快处理!";
 
         //监控库存
-        SendEmailUtil.send("wms 管理员", "liushuwei0925@gmail.com", "wms 仓库容量阀值监控", emailContent);
+        SendEmailUtil.asyncSend("WMS Admin", "liushuwei0925@gmail.com", "wms 仓库容量阀值监控", emailContent);
     }
 }
